@@ -1,0 +1,7 @@
+﻿Food_Code,Thai_Name,English_Name,SUGAR(g),Protein(g),Fat(g),Energy(kcal) by calculation,CHOCDF (g) Carbohydrate,FIBTG (g) Dietary fibre
+T231,"ส้มตำ, ไทย","Papaya salad, spicy, with dried shrimps and roasted peanuts (Som tum Thai)",0.00,4.29,2.65,0.00,0.00,0.00
+T102,"ส้มตำ, ปู กุ้ง",Papaya salad with crab and dried shrimps (Som tum Poo goong),0.00,3.70,2.10,0.00,12.80,0.00
+T103,ส้มตำ,"Papaya salad, northeastern style (Som tum Isan)",0.00,1.80,0.30,0.00,4.50,0.00
+F56,"ไส้อั่ว, ย่าง","Pork, sausage, northern style, packed in intestine",0.00,18.45,29.33,0.00,0.00,0.00
+G57,"ปลาร้า, น้ำ, ต้มสุก, สำหรับส้มตำ","Fermented fish (Plara), sauce, boiled, for papaya salad",0.00,3.47,0.66,0.00,6.33,0.00
+G66,"ปลาร้า, รวมเนื้อและน้ำ, สำหรับแกง, ปลารวม","Fermented fish (Plara), mixed flesh and sauce, for soup (northeast Thai style), mixed fish varieties",0.00,7.59,2.64,0.00,0.91,0.00

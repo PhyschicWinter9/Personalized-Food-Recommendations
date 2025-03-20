@@ -1,0 +1,39 @@
+﻿Food_Code,Thai_Name,English_Name,SUGAR(g),Protein(g),Fat(g),Energy(kcal) by calculation,CHOCDF (g) Carbohydrate,FIBTG (g) Dietary fibre
+T315,ขนมโก๋,Kanom ko,0.00,4.70,11.40,0.00,75.82,0.00
+T238,ขนมครก,Kanom khrok (coconut pudding),0.00,1.43,2.90,0.00,0.00,0.00
+T240,ขนมจาก,"Kanom jak (coconut meat mixed with black sticky rice flour and wrapped up with palm leaves, grilled)",0.00,3.37,20.90,0.00,0.00,0.00
+T243,"ขนมจีบ, หมูสับ",Kanom jeep moosub (Chinese steamed minced pork dumplings),0.00,5.43,6.85,0.00,0.00,0.00
+T161,ขนมตาล,Kanom taan (steamed toddy palm cake),0.00,2.14,0.94,0.00,0.00,0.00
+T162,ขนมถ้วยฟู,"Kanom touyfu (rice cake, fermented)",0.00,2.00,0.00,0.00,0.00,0.00
+T246,ขนมเทียน,Kanom tian (stuffed dough pyramid),0.00,5.20,6.60,0.00,0.00,0.00
+T249,ขนมบัวลอย,Kanom bualoi (Thai glutinous rice dumplings in sweet coconut cream),0.00,1.25,2.40,0.00,0.00,0.00
+T248,ขนมบ้าบิ่น,Kanom baa bin,0.00,3.30,12.08,0.00,62.40,0.00
+T250,"ขนมเบื้อง, ครีม, ไส้เค็ม","Kanom buang cream sai khem (crispy rice flour sheet with cream, prawn and grated coconut filling)",0.00,4.53,6.90,0.00,0.00,0.00
+Q45,น้ำเฉาก๊วย,"Dink, grass jelly",6.90,0.00,0.00,27.00,0.00,0.00
+U16,"รังนก, ในน้ำเชื่อม","Bird nest, in light syrup, beverage",9.10,0.40,0.03,60.00,0.00,0.30
+E38,"ผลไม้รวม, ในน้ำเชื่อม, บรรจุกระป๋อง","Tropical fruit cocktail, canned in syrup",0.00,0.53,0.73,0.00,0.00,0.00
+J33,"โยเกิร์ต, ผสมวุ้นมะพร้าว","Yoghurt, cream, with nata de coco",13.01,3.34,2.47,0.00,18.82,0.00
+M11,"ไอศครีมเชอร์เบต, รสต่างๆ","Sherbet ice cream, different flavours",21.24,1.27,2.97,130.00,0.00,1.00
+J35,"โยเกิร์ต, ไขมันต่ำ, รสต่างๆ","Yoghurt, cream, low fat, different flavours",0.00,2.97,0.80,0.00,18.13,0.00
+S32,โรตี,Roti,0.00,7.37,13.30,359.00,0.00,0.00
+S33,โรตีบอย,"Bun, rotiboy",0.00,8.22,20.44,424.00,0.00,0.00
+T163,ลอดช่องน้ำกะทิ,Lod chong in coconut milk,0.00,0.79,3.64,0.00,0.00,0.00
+T273,ลูกชุบ,Luk chup (fruit shape desserts made of mungbean flour with natural colouring),0.00,3.27,1.10,0.00,0.00,0.00
+M1,"ขนมมาร์เมลโล, สอดไส้ช็อกโกแลต","Mashmello, chocolate filled",34.30,6.30,13.50,0.00,72.90,0.00
+T151,"ลูกตาล, เชื่อม",Toddy palm in heavy syrup,0.00,1.47,0.10,0.00,0.00,0.00
+E146,"ลูกตาล, เนื้อสีเหลือง, สุก","Toddy palm, flesh, ripe",0.00,1.03,0.38,39.00,0.00,5.00
+A18,"แผ่นข้าวโพดอบกรอบ, เคลือบน้ำตาล","Corn flakes, sugar coated",37.10,4.01,0.17,343.00,0.00,19.30
+T150,วุ้นกะทิใบเตย,"Wunkathi (Jelly with coconut cream, pandanus leaves flavoured)",0.00,0.60,5.30,0.00,0.00,0.00
+T275,วุ้นตาล,Toddy palm jelly,0.00,0.10,0.03,0.00,35.00,0.00
+M2,"ลูกอม, กลิ่นบลูเบอร์รี่","Candy, blueberry flavoured",48.00,0.00,0.00,0.00,48.00,0.00
+T314,"กล้วย, เชื่อม","Banana, cooked in concentrated syrup",0.00,0.80,1.00,0.00,0.00,0.00
+T141,ทองหยอด,"Thongyodd (golden dropped, egg yolk dropped in heavy syrup)",0.00,4.30,13.40,0.00,0.00,0.00
+T316,ขนมลา,Kanomla,0.00,2.60,16.40,0.00,70.30,0.00
+T138,ขนมหม้อแกง ถั่ว,"Kanom moh kaeng (mungbean custard, baked)",0.00,5.80,7.20,0.00,0.00,0.00
+J61,"โยเกิร์ต, รสธรรมชาติ","Yoghurt, cream, plain",5.92,4.51,3.04,94.00,0.00,0.00
+A17,แผ่นข้าวโพดอบกรอบ,Corn flakes,6.71,6.31,0.24,363.00,0.00,4.40
+J62,"โยเกิร์ต, รสธัญญาหาร","Yoghurt, cream, cereal flavoured",15.39,3.57,2.52,0.00,19.27,0.00
+J60,"โยเกิร์ต, รสต่างๆ, ค่าเฉลี่ย","Yoghurt, cream, different flavours, average",12.74,3.59,2.80,106.00,0.00,0.90
+E109,"ลูกตาลอ่อน, สด","Toddy palm, young",5.00,0.50,1.00,45.00,0.00,1.90
+A7,"เกี๊ยวกึ่งสำเร็จรูป, พร้อมเครื่องปรุง รสต่างๆ","Wonton, instant, with seasoning, various flavours",5.03,10.00,15.54,403.00,0.00,0.40
+S14,"โดนัท, ฮันนี่ดิพ","Doughnut, honey dip",11.60,6.50,18.67,384.00,0.00,0.00

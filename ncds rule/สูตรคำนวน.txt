@@ -1,0 +1,12 @@
+Diabetes
+1. =IF(AND(D2<=NCDs_Rule!$B$2,E2<=NCDs_Rule!$C$2,F2<=NCDs_Rule!$D$2,H2<=NCDs_Rule!$E$2,I2<=NCDs_Rule!$F$2),"กินได้","กินไม่ได้")
+2. =IF(AND(D2<=NCDs_Rule!$B$2,F2<=NCDs_Rule!$D$2,I2<=NCDs_Rule!$F$2),"กินได้","กินไม่ได้")
+
+Obesity
+1. =IF(AND(D2<=NCDs_Rule!$B$3,E2<=NCDs_Rule!$C$3,F2<=NCDs_Rule!$D$3,H2<=NCDs_Rule!$E$3,I2<=NCDs_Rule!$F$3),"กินได้","กินไม่ได้")
+
+Hypertension
+1. =IF(AND(D2<=NCDs_Rule!$B$4,F2<=NCDs_Rule!$D$4,H2<=NCDs_Rule!$E$4,I2<=NCDs_Rule!$F$4),"กินได้","กินไม่ได้")
+
+High Cholesterol
+1. =IF(AND(D2<=NCDs_Rule!$B$5,F2<=NCDs_Rule!$D$5,I2<=NCDs_Rule!$F$5),"กินได้","กินไม่ได้")

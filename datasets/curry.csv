@@ -1,0 +1,11 @@
+﻿Food_Code,Thai_Name,English_Name,SUGAR(g),Protein(g),Fat(g),Energy(kcal) by calculation,CHOCDF (g) Carbohydrate,FIBTG (g) Dietary fibre
+T286,แกงขนุน,"Curry, young jackfruit",0.00,3.40,3.90,0.00,0.00,3.40
+T287,แกงขี้เหล็ก (ใบและดอก),"Curry, cassia leaves and flowers",0.00,4.15,10.95,0.00,0.00,2.40
+T285,แกงเขียวหวานหมู,"Curry, green, pork",0.00,6.30,6.20,0.00,0.00,2.90
+T288,แกงไตปลา,"Curry, fermented fish viscera, southern style",0.00,4.75,1.10,0.00,0.00,4.30
+T289,แกงบอน,"Curry, Gaeng bon",0.00,1.60,0.30,0.00,0.00,7.50
+T290,แกงป่าฟักทองใส่หมู,"Curry, pumpkin with pork",0.00,5.60,0.80,0.00,47.00,0.00
+T292,แกงหอยขม,"Curry, river snail, central style",0.00,5.50,10.00,0.00,0.00,4.40
+T295,แกงอ่อมเนื้อ,"Soup, spicy (Gaeng Oom) with beef, northen style",0.00,3.50,3.60,0.00,0.00,2.10
+T296,แกงอ่อมปลา,"Soup, spicy (Gaeng Oom) with fish, northen style",0.00,4.70,3.80,0.00,0.00,0.00
+N118,ไตปลา,"Fermented fish, viscera (Tai pla)",0.00,9.70,14.70,188.00,0.00,0.00

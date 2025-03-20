@@ -1,0 +1,15 @@
+﻿Food_Code,Thai_Name,English_Name,SUGAR(g),Protein(g),Fat(g),Energy(kcal) by calculation,CHOCDF (g) Carbohydrate,FIBTG (g) Dietary fibre
+D271,"ผักกาด, ดอง, ปรุงรส","Mustard green, pickled seasoning",0.00,0.00,0.00,0.00,0.00,2.70
+D272,ผักกาดแก้ว,"Lettuce (iceberg), raw",0.00,0.00,0.00,0.00,0.00,0.50
+D323,"ผักกาดขาว, สุก","Cabbage, Chinese, white, cooked",0.00,0.72,0.00,0.00,0.00,1.70
+D259,"หัวผักกาด, แห้ง, หวาน","Radish, preserved, sweetened",0.00,0.90,0.30,0.00,0.00,2.40
+D262,"กะหล่ำปลีม่วง, ดิบ","Cabbage, red, raw",0.00,0.00,0.00,0.00,0.00,2.40
+N9,ขมิ้นขาว,"Turmeric, white, fresh",0.00,0.37,0.25,0.00,5.14,0.00
+N8,ขมิ้นชัน,Turmeric,0.00,1.58,0.23,0.00,9.42,0.00
+D281,"ฟักทอง, เนื้อ,  ต้ม สายพันธุ์ต่างๆ","Pumpkin flesh, boiled, different varieties",0.00,1.08,0.37,0.00,0.00,1.80
+C95,"ฟักทอง, เมล็ด, พันธุ์ต่างๆ, แกะเปลือก","Pumpkin, seed kernels, roasted",0.00,21.79,42.40,0.00,0.00,5.93
+C115,"ฟักทอง, เมล็ด, อบเกลือ","Pumpkin, seed kernels, salted",3.45,33.40,45.40,0.00,0.00,9.40
+D310,"เห็ดหูหนูขาว, สด, ลวก 30 วินาที","Mushroom, White jelly fungus, 30 sec. blanched",0.00,0.98,0.12,0.00,0.00,1.60
+D311,"เห็ดหูหนูสีน้ำตาล, ต้ม 30 วินาที","Mushroom, Jew 's ear, 30 sec. boiled",0.00,0.57,0.00,0.00,0.00,1.00
+B7,"เผือก,นึ่ง","Taro, small corms, steamed",0.60,2.87,0.30,0.00,0.00,2.90
+B9,"มันเทศ, เนื้อสีเหลือง, นึ่ง","Sweet potato, yellow flesh, steamed",9.42,0.90,0.10,0.00,0.00,4.20

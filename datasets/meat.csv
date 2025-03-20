@@ -1,0 +1,42 @@
+﻿Food_Code,Thai_Name,English_Name,SUGAR(g),Protein(g),Fat(g),Energy(kcal) by calculation,CHOCDF (g) Carbohydrate,FIBTG (g) Dietary fibre
+G9,"กุ้งกุลาดำ, พร้อมหาง, ต้ม","Prawn, black tiger, tail on, boiled",0.00,17.80,0.70,78.00,0.00,0.00
+G196,กุ้งจ่อม,Fermented shrimp (Kungjom),0.00,10.61,0.85,84.00,0.00,0.00
+F92,"ไก่, ก้น, ย่าง","Chicken, bottom, grilled",0.00,16.97,26.13,0.00,0.00,0.00
+F135,"ไก่, โครง, ชุปแป้งทอด","Chicken, skeleton, batterfried",0.00,19.13,25.27,0.00,0.00,0.00
+F130,ไก่ตุ๋น,Chicken steamed,0.00,18.90,10.30,180.00,0.00,0.50
+F14,ไก่ต้ม,Chicken boiled,0.00,22.90,16.60,0.00,0.00,0.00
+F139,"ไก่เชียง, ทอด, ไม่ใส่น้ำมัน","Sausage, Chinese, chicken, fried, no added oil",0.00,14.65,39.28,0.00,0.00,0.00
+F140,"ไก่ยอ, ทอด","Chicken, sausage, white, streamed, fried",0.00,11.23,25.73,0.00,0.00,0.00
+U30,จั๊กจั่น,Cicada,0.00,20.60,3.63,0.00,4.54,0.00
+U5,จิ้งโกร่ง,"Cricket, giant",0.00,17.50,12.00,0.00,2.45,0.00
+U3,จิ้งหรีด,Cricket,0.00,15.75,5.75,125.00,0.00,3.50
+U2,"จิโปม, ทอด","Cricket, short tail, deepfried",0.00,35.07,44.58,0.00,0.93,0.00
+U25,ตั๊กแตนทอด,"Locust, deepfried",0.00,32.93,46.17,0.00,15.35,0.00
+U32,"ตั๊กแตนปาทังก้า, ทอด","Bombay locust, deepfried",0.00,39.80,31.40,0.00,8.60,0.00
+G238,"ปลากราย, แหนม",Fermented spotted featherback (Nham),0.00,16.37,4.10,89.00,0.00,0.00
+G48,ปลาช่อนต้ม,"Striped snakehead fish, boiled",0.00,18.70,8.60,0.00,6.10,0.00
+G210,ปลาช่อนนึ่ง,"Striped snakehead fish,steamed",0.00,13.33,32.25,0.00,32.24,0.00
+G74,"ปลาดุกอุย, ต้ม","Gunther's walking catfish, boiled",0.00,18.20,15.50,0.00,4.47,0.00
+G78,"ปลาตะเพียนขาว, ต้ม","Common silver barb, boiled",0.00,19.38,10.70,0.00,61.34,0.00
+T221,ปลาแนม,"Planam ( Fish, shredded, mixed with slices of pork skin)",0.00,5.53,1.37,0.00,0.00,0.00
+G103,ปลาร้า,"Fermented fish (Plara), different markets",0.00,12.97,4.06,0.00,6.25,0.00
+G126,"ปลาสวาย, ต้ม","Striped catfish, boiled",0.00,19.38,10.80,76.00,0.00,0.00
+G70,"ปลาหมึก, กรอบ","Squid snack, crispy",0.00,2.40,4.50,0.00,1.50,0.00
+G108,"ปลาหมึกแห้งแช่ด่าง (ใส่เย็นตาโฟ), ลวก","Dried squid, rehydrated with lye water, blanched",0.00,10.20,0.47,45.00,0.00,0.00
+G158,"ปู, ในน้ำเกลือ, บรรจุกระป๋อง, เฉพาะเนื้อ","Crab, meat, canned in brine, drained",0.00,16.15,0.83,73.00,0.00,0.00
+G157,"ปูทะเล, เนื้อ, ต้ม","Crab, serraed mud, meat, boiled",0.00,17.60,0.00,91.00,0.00,0.00
+G161,"ปูม้า, ดอง","Crab, blue swimming, salted",0.00,15.11,0.92,81.00,0.00,0.00
+G162,"ปูแสม, เค็ม","Crab, Meder's mangrove, salted",0.00,7.46,0.31,8.00,0.00,0.00
+F117,"เป็ด, ย่าง","Duck, grilled",0.00,20.80,22.40,0.00,0.00,0.00
+F50,"เป็ด, เลือด, ต้ม","Duck, blood, cooked",0.00,5.90,0.10,24.00,0.00,0.00
+G165,"แมงกะพรุน, แห้ง","Jellyfish, dried",0.00,6.90,0.00,48.00,0.00,0.00
+F81,"หมู, เลือด, ต้ม","Pork, blood, cooked",0.00,12.07,0.07,49.00,0.00,0.00
+F70,"หมู,ต้ม","Pork,  boiled",0.00,18.85,20.19,17.00,0.00,0.00
+F162,หมูกรอบ (หมูสามชั้นทอดกรอบ),"Pork, belly, deepfried",0.00,19.90,46.90,0.00,0.00,0.00
+G167,"หอยกะพง, ดอง","Mussel, horse, fermented",0.00,6.10,0.90,68.00,0.00,0.00
+G170,"หอยแครง, ดอง","Cockle / ark shell, fermented",0.00,8.79,2.93,0.00,0.00,0.00
+G175,"หอยนางรม, บรรจุกระป๋อง","Oyster, canned",0.00,13.70,28.45,55.00,0.00,0.00
+G176,"หอยนางรมลอย, ดอง","Oyster, pearl, fermented",0.00,5.80,2.50,50.00,0.00,0.00
+G178,"หอยแมลงภู่, ดอง","Mussel, green, fermented",0.00,2.94,0.41,76.00,0.00,0.00
+G182,"หอยลาย, ในน้ำเกลือ, บรรจุกระป๋อง, เฉพาะเนื้อ","Clam, undulated surf, canned in brine, liquid excluded",0.00,15.45,2.00,54.00,0.00,1.80
+G185,"หอยเสียบ, ดอง","Clam, bean / wedge shell, fermented",0.00,10.55,0.39,69.00,0.00,0.00

@@ -1,0 +1,45 @@
+﻿Food_Code,Thai_Name,English_Name,SUGAR(g),Protein(g),Fat(g),Energy(kcal) by calculation,CHOCDF (g) Carbohydrate,FIBTG (g) Dietary fibre
+T60,ข้าวยำปักษ์ใต้,Khaoyumpaktai (Southern style rice salad: Rice with assorted vegetables served with southern fish sauce (Nam boodoo)),0.00,3.80,3.50,0.00,0.00,0.00
+T44,ข้าวราดไข่พะโล้,Rice topped with egg in five spices soup,0.00,5.66,6.45,0.00,0.00,0.00
+T45,ข้าวราดผัดเครื่องในใส่ขิง,Rice with stirfried chicken organ and ginger,0.00,4.40,7.30,0.00,23.20,0.00
+T207,ข้าวหน้าเป็ดย่าง,"Rice, topped with roasted duck)",0.00,5.20,4.20,0.00,0.00,0.00
+T208,ข้าวหมก (เฉพาะข้าว),Rice cooked with curry powder,0.00,3.33,3.13,0.00,33.53,0.00
+T64,ข้าวหมูแดง,Rice with roasted pork and gravy,0.00,6.29,4.18,0.00,0.00,0.00
+A23,"ข้าวเหนียว, นึ่ง","Rice, glutinous, polished, steamed",0.00,4.54,0.21,232.00,0.00,0.30
+T139,ข้าวเหนียวมูล,"Khaoniaomoon (glutinous rice, steamed in coconut milk)",0.00,3.10,6.30,0.00,0.00,0.00
+A90,"ข้าวขาวสำเร็จรูป, บรรจุกระป๋อง","Rice, polished, cooked, canned",0.00,1.00,0.30,122.00,0.00,0.20
+T51,ข้าวต้มหมู,Porridge rice with pork,0.00,4.19,1.09,0.00,0.00,0.00
+T56,ข้าวผัดหมู,"Fried rice with pork, vegetable and egg",0.00,5.75,6.34,0.00,15.90,0.00
+T397,ข้าวมัน (เฉพาะข้าว),Khaomun (Rice cooked in chicken broth),0.00,3.07,3.47,0.00,0.00,0.00
+A59,"ข้าวกล้อง, สุก","Rice, brown, cooked",0.00,3.93,1.46,181.00,0.00,2.00
+A89,"ข้าวกล้องสำเร็จรูป, บรรจุกระป๋อง","Rice, brown, cooked, canned",0.00,1.00,1.80,202.00,0.00,2.20
+H4,"ไข่ไก่, เจียว (เติมน้ำปลา)","Egg, hen, omelet (fish sauce added)",0.00,13.98,32.89,361.00,0.00,0.00
+H18,"ไข่ไก่, ต้ม, 10 นาที","Egg, hen, whole, boiled (10 min)",0.00,13.15,8.31,138.00,0.00,0.00
+H6,"ไข่ไก่, ตุ๋น (เติมน้ำและน้ำปลา)","Egg, hen, steamed (water and fish sauce added)",0.00,4.93,3.32,61.00,0.00,0.00
+H16,"ไข่เค็ม, ไข่เป็ด, เสริมไอโอดีน","Egg, duck, salted, iodine fortified, raw",0.00,13.20,13.90,184.00,0.00,0.00
+H23,"ไข่นกกระทา, ทอดบนถาดหลุมขนมครก","Egg, quail, fried in a mold",0.00,14.34,18.58,230.00,0.00,0.00
+H8,"ไข่นกกระทา, สุก (ต้ม 5 นาที)","Egg, quail, whole, boiled (5 min)",0.00,13.15,10.52,150.00,0.00,0.00
+T68,"โจ๊ก, หมู",Porridge rice with minced pork,0.00,1.56,2.63,0.00,0.00,0.00
+A26,"โจ๊กกึ่งสำเร็จรูป, พร้อมเครื่องปรุง","Rice porridge, instant, with seasoning",2.26,9.93,1.02,350.00,0.00,0.90
+S25,"พิซซ่า, ซุปเปอร์สุพรีม","Pizza, super supreme",0.00,12.96,9.59,0.00,29.11,0.00
+S27,"พิซซ่า, ทะเล","Pizza, seafood",0.00,7.58,3.96,116.00,0.00,1.70
+S36,"พิซซ่า, ฮาวายเอี้ยน, ชนิดหนา","Pizza, Hawaiian, thick crust",0.00,12.82,8.13,0.00,30.22,0.00
+F137,"ลูกชิ้น, ไก่","Meat ball, chicken",0.00,7.55,5.50,94.00,0.00,0.00
+F148,"ลูกชิ้น, วัว","Meat ball, beef",0.00,3.94,0.88,30.00,0.00,0.00
+F154,"ลูกชิ้น, หมู","Meat ball, pork",0.00,4.91,2.91,58.00,0.00,0.00
+F158,"ลูกชิ้นแคะ, เนื้อผสม (หมู, กุ้ง, ปลา) ผสมเต้าหู้, นึ่ง","Typical Chinese ball, minced mixed meat (pork, shrimp, fish) with hard white tofu, steamed",0.00,6.60,5.55,88.00,0.00,0.00
+F157,"ลูกชิ้นแคะ, เนื้อผสม (หมู, กุ้ง, ปลา), นึ่ง","Typical Chinese ball, minced mixed meat (pork, shrimp, fish), steamed",0.00,11.60,16.20,0.00,0.00,0.00
+F161,"ไส้กรอก, หมู, ทอด","Sausage, pork, deepfried",0.00,12.70,20.70,0.00,0.00,0.00
+T166,ปอเปี๊ยะสด,"Spring roll, nonfried",0.00,4.99,5.57,0.00,0.00,0.00
+S31,"พิซซ่า, หน้าต่างๆ (ไก่,เนื้อ,เบคอน,ผัก,มายองเนส, ทูน่า)","Pizza, different topping",3.25,11.84,9.32,243.00,0.00,2.10
+S34,"แฮมเบอร์เกอร์, ไก่","Hamburger, chicken",0.00,13.29,15.99,294.00,0.00,2.30
+S35,"แฮมเบอร์เกอร์, เนื้อ","Hamburger, beef",0.00,12.58,12.75,254.00,0.00,1.40
+S38,ฮอทดอก,Hot dog,0.00,10.20,13.10,269.00,0.00,2.70
+T97,"มักกะโรนี, หมู",Fried macaroni with pork,0.00,5.70,7.00,0.00,0.00,0.00
+S37,มันฝรั่งทอด,French fries,0.00,4.11,19.25,345.00,0.00,5.30
+B19,"มันสำปะหลัง, ต้ม","Cassava, boiled",0.00,0.40,0.20,0.00,0.00,2.30
+A85,แผ่นเกี๊ยวทอด ไม่มีหมู,"Wonton wrapper or dumpling wrapper, fried",0.00,8.30,35.63,0.00,51.00,0.00
+S6,"แซนวิช, ไก่","Sandwiches, chicken",0.00,12.27,14.34,271.00,0.00,1.60
+S7,"แซนวิช, ปลา","Sandwiches, fish",0.00,10.46,15.84,0.00,27.47,0.00
+T71,ซุปฟัก,"Soup, wax gourd",0.00,2.50,0.00,10.00,0.00,0.00
+T73,ซุปหน่อไม้,"Bamboo shoot salad, northeastern style",0.00,2.80,0.53,0.00,4.30,0.00

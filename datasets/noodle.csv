@@ -1,0 +1,47 @@
+﻿Food_Code,Thai_Name,English_Name,SUGAR(g),Protein(g),Fat(g),Energy(kcal) by calculation,CHOCDF (g) Carbohydrate,FIBTG (g) Dietary fibre
+T3,ก๋วยจั๊บ,"Noodle sheets, soup with meat and tofu (Guay jub)",0.00,4.55,3.67,0.00,0.00,0.00
+A44,"ก๋วยจั๊บญวน, เส้น, ต้มสุก","Noodles, Vietnamese, cooked",0.00,1.37,0.18,116.00,0.00,0.80
+T7,"ก๋วยเตี๋ยว, เนื้อสับ","Rice noodles, topped with minced beef in gravy",0.00,3.50,4.10,0.00,15.20,0.00
+C79,"ก๋วยเตี๋ยวเซี่ยงไฮ้, แห้ง","Noodles, Mungbean sheets, dried (Shanghai style noodles)",0.00,0.20,0.10,0.00,0.00,1.80
+A3,"ก๋วยเตี๋ยวเส้นเล็ก, สด","Noodles, rice, narrow sized strip, fresh",0.00,4.07,0.95,234.00,0.00,0.50
+A5,"ก๋วยเตี๋ยวเส้นเล็ก, อบ/ตาก, แห้ง (เส้นจันท์)","Noodles, rice, dried, narrow sized strip Chanthaburi noodles (Sen Jan)",0.00,5.45,0.30,0.00,81.10,0.00
+T10,"ก๋วยเตี๋ยวเส้นใหญ่, น้ำ, เย็นตาโฟ","Yentafo (Rice noodles, with fish ball, swamp cabbage red sauce and soup)",0.00,3.05,2.67,0.00,0.00,0.00
+T12,"ก๋วยเตี๋ยวเส้นใหญ่, ราดหน้า, กุ้ง","Guay teaw rad nah, goong (Fried rice noodles with dark soy sauce, topped with fried chinese kale, shrimps and gravy)",0.00,2.40,2.70,0.00,12.40,0.00
+T13,"ก๋วยเตี๋ยวเส้นใหญ่, ราดหน้า, ไก่/หมู","Guayteawradnah (Fried rice noodles with dark soy sauce, topped with fried chinese kale, chicken/pork and gravy)",0.00,2.95,5.55,0.00,12.30,0.00
+A4,"ก๋วยเตี๋ยวเส้นใหญ่, สด","Noodles, rice, big sized strip, fresh",0.00,2.87,1.71,155.00,0.00,0.70
+A8,ขนมจีน,"Noodles, rice, fermented (kanomjeen)",0.00,1.43,0.31,103.00,0.00,0.30
+T36,"ขนมจีน, ซาวน้ำ, ภาคกลาง","Kanomjeensownam (Fermented rice noodles, with pineapple, ground shrimp, garlic and coconut milk)",0.00,2.50,4.60,0.00,17.10,0.00
+T37,"ขนมจีน, น้ำเงี้ยว, ภาคเหนือ","Kanomjeennamngeaw (Fermented rice noodles, with minced pork/ beef/spareribs cooked in Thai herbs flavour soup)",0.00,4.00,3.55,0.00,0.00,0.00
+T38,"ขนมจีน, น้ำพริก, ภาคกลาง","Kanomjeennamprik (Fermented rice noodles, topped with peanut curry)",0.00,3.10,4.60,0.00,20.70,0.00
+T39,"ขนมจีน, น้ำยา","Kanomjeennamya (Fermented rice noodles, topped with fish curry)",0.00,2.69,2.11,0.00,0.00,0.00
+T310,ข้าวซอยไก่,Northern Thai noodle with chicken curry soup,0.00,5.80,10.60,0.00,0.00,0.00
+A71,"บะหมี่กึ่งสำเร็จรูป, รสหมูสับ, บรรจุในถ้วย","Noodles, wheat, instant, with seasoning, pork flavour, in cup",1.40,11.70,16.80,416.00,0.00,3.40
+T311,เต้าคั่ว,Thai noodle salad (Tao Khao),0.00,3.90,5.80,0.00,23.80,0.00
+A47,"ก๋วยเตี๋ยวเส้นเล็ก, อบแห้ง พร้อมเครื่องปรุง","Noodles, rice, dried, narrow sized strip, with seasoning",3.53,6.33,6.07,362.00,0.00,1.90
+A74,บะหมี่อบแห้งกึ่งสำเร็จรูป รสต่างๆ,"Noodles, wheat, oven dried, instant, with seasoning, different flavoures",3.67,11.78,4.57,361.00,0.00,3.10
+C78,"วุ้นเส้นกึ่งสำเร็จรูป, พร้อมเครื่องปรุง, รสต่างๆ","Mungbean, noodles, instant, with seasonings, mix flavours",4.89,1.67,4.65,0.00,0.00,1.60
+A56,"บะหมี่กึ่งสำเร็จรูป, ไม่รวมเครื่องปรุง","Noodles, wheat, instant, without seasoning",8.41,6.66,5.71,363.00,0.00,1.20
+T153,"บะหมี่, ลูกชิ้น, น้ำ","Wheat noodle (Bamee), with meat ball and soup",0.00,4.30,2.44,0.00,0.00,0.00
+T92,"บะหมี่, หมูแดง, น้ำ",Wheat noodle (Bamee) with roasted pork and soup,0.00,4.40,8.60,0.00,0.00,0.00
+A67,"บะหมี่กึ่งสำเร็จรูป, พร้อมเครื่องปรุง, ต้ม","Noodles, wheat, instant, with seasoning, cooked",0.00,1.65,1.84,0.00,6.61,0.00
+A128,"ก๋วยเตี๋ยว, ผัดไทย, กึ่งสำเร็จรูป","Rice noodles,stir fried with pad thai sauce (Guayteaw padthai )",17.30,4.47,0.40,270.00,0.00,1.40
+A121,หมี่ตะคุ/หมี่โคราช,"Noodles, rice, vermicelli, Thai Korat style (Meetaku/Meekorat)",18.30,4.80,6.00,393.00,0.00,1.30
+T105,"เส้นเล็ก, เนื้อสด, น้ำ","Rice noodles, small size, with beef and soup",0.00,4.60,2.70,0.00,8.50,0.00
+T154,"เส้นเล็ก, เป็ด, น้ำ","Rice noodles, small size, with duck and soup",0.00,4.56,5.15,0.00,0.00,0.00
+T106,"เส้นเล็ก, ลูกชิ้นเนื้อวัว, น้ำ","Rice noodles, small size, with beef ball and soup",0.00,4.00,0.00,0.00,0.00,0.00
+T107,"เส้นเล็ก, ลูกชิ้นเนื้อวัว, เนื้อสด0เปื่อย, น้ำ","Rice noodles, small size, with beef ball, beef, stewed beef and soup",0.00,5.90,1.70,0.00,9.90,0.00
+T110,"เส้นเล็ก, ลูกชิ้นเนื้อวัว, แห้ง","Rice noodles, small size, with beef ball (wihout soup)",0.00,5.50,6.70,0.00,17.60,0.00
+T112,"เส้นหมี่, เนื้อเปื่อย,น้ำ","Rice noodles, fine thread, with stewed beef and soup",0.00,5.40,2.70,0.00,0.00,0.00
+T113,"เส้นหมี่, เนื้อสด เปื่อย","Rice noodles, fine thread, with beef and stewed beef (wihout soup)",0.00,5.10,2.70,0.00,0.00,0.00
+T115,"เส้นหมี่, เนื้อสด,น้ำ","Rice noodles, fine thread, with beef and soup",0.00,4.40,2.00,0.00,0.00,0.00
+T312,"เส้นหมี่, ผัดซีอิ้ว","Fried rice noodles (fine thread) with pork, egg and soysauce",0.00,2.40,2.10,0.00,33.90,0.00
+T122,"เส้นหมี่, ลูกชิ้นเนื้อวัว, น้ำ","Rice noodles, fine thread, with beef ball and soup",0.00,3.16,1.26,49.00,0.00,0.70
+T121,"เส้นหมี่, ลูกชิ้นเนื้อวัว, แห้ง","Rice noodles, fine thread, with beef ball (without soup)",0.00,5.87,8.11,0.00,21.70,0.00
+A40,"เส้นหมี่, อบ / ตาก, แห้ง","Noodles, rice, vermicelli, dried",0.00,7.00,0.73,375.00,0.00,1.30
+A87,"เส้นหมี่ขาว, ทอด","Noodles, rice, dried, deep fried",0.00,4.02,42.85,0.00,52.15,0.00
+A88,เส้นหมี่ข้าวกล้อง,"Noodles, brown rice, vermicelli",0.00,7.90,3.03,369.00,0.00,3.70
+T123,"เส้นใหญ่, ลูกชิ้นเนื้อวัว, น้ำ","Rice noodles, big size, with beef ball and soup",0.00,4.58,0.72,0.00,9.00,0.00
+T131,หมี่กรอบ,"Meekrop (Rice noodles, deep fried, crispy)",0.00,2.90,29.40,0.00,0.00,0.00
+T132,หมี่กะทิ,Meekathi (Rice noodles covered with tofu fried in coconut cream),0.00,3.90,6.60,0.00,0.00,0.00
+A42,หมี่ซั่ว (แป้งสาลี 100%),"Noodles, wheat, dried, longevity (Meesua)",0.00,12.30,0.80,326.00,0.00,4.60
+A43,"ก๋วยจั๊บ, เส้น, ต้มสุก","Pasta, Chinese, squares shape sheet, roled (kuay jap), boiled",0.00,1.67,0.08,133.00,0.00,0.40
