@@ -17,4 +17,5 @@ seaborn==0.13.2
 six==1.17.0
 Tcl==0.2
 threadpoolctl==3.6.0
+ttkbootstrap==1.10.1
 tzdata==2025.1
