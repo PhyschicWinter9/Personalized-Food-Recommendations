@@ -1,20 +1,19 @@
-import pandas as pd
-import numpy as np
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-import tkinter as tk
-from tkinter import ttk, messagebox, font
-import time
-import threading
-import os
 import glob
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import seaborn as sns
-import matplotlib.pyplot as plt
-from matplotlib.patches import Patch
+import os
+import time
+import tkinter as tk
+from tkinter import messagebox, ttk
+
 import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
 matplotlib.use('Agg')  # Use non-interactive backend for compatibility
 
 # Set higher DPI awareness for Windows
