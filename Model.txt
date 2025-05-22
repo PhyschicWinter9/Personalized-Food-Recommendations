@@ -3,3 +3,4 @@ Performance Metrics จาก ML ทั้งสามตัว (KNN RF XGB)
 1. K-NN (K-Nearest Neighbors) ✅
 2. Random Forest
 3. XGBoost
+4. Multi-layer Perceptron (MLP) หรือ Deep Neural Networks (Optional)
