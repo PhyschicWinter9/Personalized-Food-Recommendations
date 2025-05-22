@@ -38,6 +38,11 @@ class HealthProfile:
     obesity: bool = False
     hypertension: bool = False
     high_cholesterol: bool = False
+    # Thai Traditional Medicine
+    use_thai_element: bool = False
+    birth_month: int = 1
+    birth_year: int = 1990
+    life_element: str = ""
 
 @dataclass
 class NutritionalTargets:
@@ -52,6 +57,113 @@ class NutritionalTargets:
     sodium_mg: float
     potassium_mg: float
     explanation: str
+    thai_element_guidance: str = ""
+
+class ThaiElementCalculator:
+    """Thai Traditional Medicine Life Element Calculator"""
+    
+    # Thai elements and their characteristics
+    ELEMENTS = {
+        'ดิน': {
+            'name_thai': 'ดิน',
+            'name_english': 'Earth (Din)',
+            'characteristics': 'Stable, grounded, digestive strength',
+            'favorable_foods': ['rice', 'root vegetables', 'grains', 'beans'],
+            'avoid_foods': ['too spicy', 'too cold', 'raw foods'],
+            'nutritional_focus': 'warm, cooked foods with moderate spices'
+        },
+        'น้ำ': {
+            'name_thai': 'น้ำ',
+            'name_english': 'Water (Nam)',
+            'characteristics': 'Cooling, fluid balance, kidney health',
+            'favorable_foods': ['coconut', 'cucumber', 'watermelon', 'fish'],
+            'avoid_foods': ['too salty', 'too hot', 'fried foods'],
+            'nutritional_focus': 'cooling foods, adequate hydration, low sodium'
+        },
+        'ลม': {
+            'name_thai': 'ลม',
+            'name_english': 'Wind (Lom)',
+            'characteristics': 'Movement, circulation, nervous system',
+            'favorable_foods': ['ginger', 'garlic', 'herbs', 'warm soups'],
+            'avoid_foods': ['cold drinks', 'raw foods', 'gas-producing foods'],
+            'nutritional_focus': 'warm, easily digestible, anti-inflammatory'
+        },
+        'ไฟ': {
+            'name_thai': 'ไฟ',
+            'name_english': 'Fire (Fai)',
+            'characteristics': 'Heat, metabolism, energy transformation',
+            'favorable_foods': ['cooling herbs', 'bitter vegetables', 'mild foods'],
+            'avoid_foods': ['very spicy', 'fried', 'alcohol', 'excessive heat'],
+            'nutritional_focus': 'cooling, bitter tastes, moderate portions'
+        }
+    }
+    
+    def calculate_life_element(self, birth_month: int, birth_year: int) -> str:
+        """Calculate Thai life element based on birth month and year"""
+        # Simplified calculation based on traditional Thai astrology
+        # This is a basic implementation - actual calculations may be more complex
+        
+        # Convert to Buddhist year for traditional calculation
+        buddhist_year = birth_year + 543
+        
+        # Element cycle based on year (simplified 4-year cycle)
+        year_cycle = buddhist_year % 4
+        
+        # Month influence (seasons in Thailand)
+        if birth_month in [12, 1, 2]:  # Cool season
+            season_modifier = 0
+        elif birth_month in [3, 4, 5]:  # Hot season  
+            season_modifier = 1
+        elif birth_month in [6, 7, 8, 9]:  # Rainy season
+            season_modifier = 2
+        else:  # Late rainy/transition
+            season_modifier = 3
+        
+        # Combine year cycle and season
+        element_index = (year_cycle + season_modifier) % 4
+        
+        elements = ['ดิน', 'น้ำ', 'ลม', 'ไฟ']
+        return elements[element_index]
+    
+    def get_element_info(self, element: str) -> dict:
+        """Get detailed information about a life element"""
+        return self.ELEMENTS.get(element, {})
+    
+    def get_dietary_guidance(self, element: str, health_conditions: list) -> str:
+        """Get dietary guidance based on life element and health conditions"""
+        element_info = self.get_element_info(element)
+        if not element_info:
+            return ""
+        
+        guidance = f"Thai Traditional Medicine - {element_info['name_english']}:\n"
+        guidance += f"Characteristics: {element_info['characteristics']}\n\n"
+        
+        guidance += "Traditional Dietary Recommendations:\n"
+        guidance += f"• Focus: {element_info['nutritional_focus']}\n"
+        guidance += f"• Favorable: {', '.join(element_info['favorable_foods'])}\n"
+        guidance += f"• Minimize: {', '.join(element_info['avoid_foods'])}\n\n"
+        
+        # Combine with modern health conditions
+        if health_conditions:
+            guidance += "Integration with Health Conditions:\n"
+            
+            if 'Diabetes' in health_conditions:
+                if element == 'ดิน':
+                    guidance += "• Earth + Diabetes: Focus on complex carbs, avoid refined sugars\n"
+                elif element == 'น้ำ':
+                    guidance += "• Water + Diabetes: Cooling foods help reduce inflammation\n"
+                elif element == 'ลม':
+                    guidance += "• Wind + Diabetes: Warm spices help circulation and metabolism\n"
+                elif element == 'ไฟ':
+                    guidance += "• Fire + Diabetes: Cool, bitter foods help balance blood sugar\n"
+            
+            if 'Hypertension' in health_conditions and element == 'น้ำ':
+                guidance += "• Water element naturally supports low-sodium approach\n"
+            
+            if 'Obesity' in health_conditions and element == 'ไฟ':
+                guidance += "• Fire element benefits from cooling, lighter foods for weight management\n"
+        
+        return guidance
 
 class MedicalNutritionCalculator:
     """Medical-grade nutritional calculation engine based on established formulas"""
@@ -191,6 +303,25 @@ class MedicalNutritionCalculator:
         # Generate explanation
         explanation = self._generate_explanation(profile, energy_kcal)
         
+        # Generate Thai element guidance if enabled
+        thai_element_guidance = ""
+        if profile.use_thai_element:
+            thai_calculator = ThaiElementCalculator()
+            element = thai_calculator.calculate_life_element(profile.birth_month, profile.birth_year)
+            
+            # Get active health conditions
+            active_conditions = []
+            if profile.diabetes:
+                active_conditions.append('Diabetes')
+            if profile.obesity:
+                active_conditions.append('Obesity')
+            if profile.hypertension:
+                active_conditions.append('Hypertension')
+            if profile.high_cholesterol:
+                active_conditions.append('High_Cholesterol')
+            
+            thai_element_guidance = thai_calculator.get_dietary_guidance(element, active_conditions)
+        
         return NutritionalTargets(
             energy_kcal=energy_kcal,
             protein_g=protein_g,
@@ -201,7 +332,8 @@ class MedicalNutritionCalculator:
             fiber_g=fiber_g,
             sodium_mg=sodium_mg,
             potassium_mg=potassium_mg,
-            explanation=explanation
+            explanation=explanation,
+            thai_element_guidance=thai_element_guidance
         )
     
     def _generate_explanation(self, profile: HealthProfile, energy_kcal: float) -> str:
@@ -369,8 +501,12 @@ class HealthDrivenKNN:
         for condition in ['Diabetes', 'Obesity', 'Hypertension', 'High_Cholesterol']:
             self.food_data[f'{condition}_Score'] = 0.0
         
+        # Initialize Thai element scores
+        for element in ['ดิน', 'น้ำ', 'ลม', 'ไฟ']:
+            self.food_data[f'Element_{element}_Score'] = 0.0
+        
         for idx, food in self.food_data.iterrows():
-            # Diabetes score (lower is better)
+            # Existing health condition scoring
             diabetes_score = 0
             diabetes_score += max(0, food.get('SUGAR(g)', 0) - 10) * 2  # Penalty for high sugar
             diabetes_score += max(0, food.get('CHOCDF (g) Carbohydrate', 0) - 30) * 0.5  # Penalty for high carbs
@@ -401,6 +537,49 @@ class HealthDrivenKNN:
             cholesterol_score += max(0, cholesterol - 50) * 0.02  # Penalty for dietary cholesterol
             cholesterol_score -= min(food.get('FIBTG (g) Dietary fibre', 0), 10) * 0.3  # Bonus for fiber
             self.food_data.at[idx, 'High_Cholesterol_Score'] = max(0, cholesterol_score)
+            
+            # Thai Element Scoring (traditional approach)
+            category = food.get('Category', '').lower()
+            
+            # Earth (ดิน) - prefers grains, roots, cooked foods
+            earth_score = 5.0  # neutral base
+            if any(word in category for word in ['rice', 'grain', 'root']):
+                earth_score -= 2.0  # bonus for earth-friendly foods
+            if 'raw' in category or food.get('SUGAR(g)', 0) > 20:
+                earth_score += 1.0  # penalty for raw or very sweet
+            self.food_data.at[idx, 'Element_ดิน_Score'] = max(0, earth_score)
+            
+            # Water (น้ำ) - prefers cooling, low sodium foods  
+            water_score = 5.0
+            sodium = food.get('Na(mg)', 500)
+            if sodium < 300:  # low sodium bonus
+                water_score -= 2.0
+            if sodium > 800:  # high sodium penalty
+                water_score += 2.0
+            if any(word in category for word in ['fruit', 'coconut', 'cucumber']):
+                water_score -= 1.0  # cooling foods bonus
+            self.food_data.at[idx, 'Element_น้ำ_Score'] = max(0, water_score)
+            
+            # Wind (ลม) - prefers warm, digestible foods
+            wind_score = 5.0
+            if any(word in category for word in ['soup', 'curry', 'warm']):
+                wind_score -= 2.0  # warm foods bonus
+            if category in ['salad'] and food.get('SUGAR(g)', 0) < 5:
+                wind_score += 1.0  # raw foods penalty
+            if food.get('FIBTG (g) Dietary fibre', 0) > 5:
+                wind_score -= 1.0  # good digestion bonus
+            self.food_data.at[idx, 'Element_ลม_Score'] = max(0, wind_score)
+            
+            # Fire (ไฟ) - prefers cooling, bitter, mild foods
+            fire_score = 5.0
+            spicy_categories = ['curry', 'spicy']
+            if any(word in category for word in spicy_categories):
+                fire_score += 1.5  # penalty for hot/spicy foods
+            if any(word in category for word in ['vegetable', 'herb', 'bitter']):
+                fire_score -= 1.5  # cooling foods bonus
+            if food.get('Fat(g)', 0) > 20:  # high fat penalty for fire
+                fire_score += 1.0
+            self.food_data.at[idx, 'Element_ไฟ_Score'] = max(0, fire_score)
     
     def train_knn_model(self):
         """Train KNN model with health-optimized features"""
@@ -518,9 +697,24 @@ class HealthDrivenKNN:
                 if score_col in self.food_data.columns:
                     health_scores[condition] = food[score_col]
             
+            # Calculate Thai element suitability if enabled
+            thai_element_score = 0
+            if health_profile.use_thai_element:
+                thai_calculator = ThaiElementCalculator()
+                user_element = thai_calculator.calculate_life_element(
+                    health_profile.birth_month, health_profile.birth_year
+                )
+                element_score_col = f'Element_{user_element}_Score'
+                if element_score_col in self.food_data.columns:
+                    thai_element_score = food[element_score_col]
+            
             # Calculate overall health score
-            if health_scores:
-                avg_health_score = np.mean(list(health_scores.values()))
+            total_health_scores = list(health_scores.values())
+            if thai_element_score > 0:
+                total_health_scores.append(thai_element_score)
+            
+            if total_health_scores:
+                avg_health_score = np.mean(total_health_scores)
                 health_rating = "Excellent" if avg_health_score < 2 else "Good" if avg_health_score < 5 else "Fair"
             else:
                 avg_health_score = 0
@@ -539,6 +733,7 @@ class HealthDrivenKNN:
                 'sodium': food.get('Na(mg)', 0),
                 'distance': distances[0][i],
                 'health_scores': health_scores,
+                'thai_element_score': thai_element_score,
                 'health_rating': health_rating,
                 'avg_health_score': avg_health_score
             }
@@ -549,8 +744,8 @@ class HealthDrivenKNN:
             if len(recommendations) >= max_recommendations:
                 break
         
-        # Sort by combined score (distance + health score)
-        if active_conditions:
+        # Sort by combined score (distance + health score + thai element score)
+        if active_conditions or health_profile.use_thai_element:
             recommendations.sort(key=lambda x: x['distance'] + x['avg_health_score'])
         else:
             recommendations.sort(key=lambda x: x['distance'])
@@ -742,6 +937,41 @@ class HealthDrivenFoodRecommenderGUI:
         ttk.Checkbutton(conditions_frame, text="Hypertension", variable=self.hypertension_var).grid(row=1, column=0, sticky=tk.W, pady=5)
         ttk.Checkbutton(conditions_frame, text="High Cholesterol", variable=self.cholesterol_var).grid(row=1, column=1, sticky=tk.W, padx=(20, 0), pady=5)
         
+        # Thai Traditional Medicine (Optional)
+        thai_frame = ttk.LabelFrame(scrollable_frame, text="Thai Traditional Medicine (Optional)", padding="15")
+        thai_frame.pack(fill=tk.X, pady=(0, 15))
+        
+        # Enable Thai element checkbox
+        self.use_thai_element_var = tk.BooleanVar()
+        enable_thai_check = ttk.Checkbutton(thai_frame, text="Use Thai Life Element Analysis", 
+                                          variable=self.use_thai_element_var,
+                                          command=self.toggle_thai_inputs)
+        enable_thai_check.grid(row=0, column=0, columnspan=4, sticky=tk.W, pady=5)
+        
+        # Birth information (initially disabled)
+        ttk.Label(thai_frame, text="Birth Month:").grid(row=1, column=0, sticky=tk.W, pady=5)
+        self.birth_month_var = tk.IntVar(value=1)
+        self.birth_month_combo = ttk.Combobox(thai_frame, textvariable=self.birth_month_var,
+                                            values=list(range(1, 13)), width=8, state="disabled")
+        self.birth_month_combo.grid(row=1, column=1, sticky=tk.W, padx=(10, 0), pady=5)
+        
+        ttk.Label(thai_frame, text="Birth Year:").grid(row=1, column=2, sticky=tk.W, padx=(20, 0), pady=5)
+        self.birth_year_var = tk.IntVar(value=1990)
+        self.birth_year_spin = ttk.Spinbox(thai_frame, from_=1950, to=2010, 
+                                         textvariable=self.birth_year_var, width=8, state="disabled")
+        self.birth_year_spin.grid(row=1, column=3, sticky=tk.W, padx=(10, 0), pady=5)
+        
+        # Life element display
+        ttk.Label(thai_frame, text="Life Element:").grid(row=2, column=0, sticky=tk.W, pady=5)
+        self.life_element_var = tk.StringVar(value="Not calculated")
+        self.life_element_label = ttk.Label(thai_frame, textvariable=self.life_element_var, 
+                                          font=('Arial', 10, 'bold'), foreground="#007bff")
+        self.life_element_label.grid(row=2, column=1, columnspan=3, sticky=tk.W, padx=(10, 0), pady=5)
+        
+        # Bind calculation
+        self.birth_month_var.trace_add("write", self.calculate_life_element)
+        self.birth_year_var.trace_add("write", self.calculate_life_element)
+        
         # Calculate button
         calc_frame = ttk.Frame(scrollable_frame)
         calc_frame.pack(fill=tk.X, pady=20)
@@ -929,8 +1159,45 @@ class HealthDrivenFoodRecommenderGUI:
             diabetes=self.diabetes_var.get(),
             obesity=self.obesity_var.get(),
             hypertension=self.hypertension_var.get(),
-            high_cholesterol=self.cholesterol_var.get()
+            high_cholesterol=self.cholesterol_var.get(),
+            use_thai_element=self.use_thai_element_var.get(),
+            birth_month=self.birth_month_var.get(),
+            birth_year=self.birth_year_var.get(),
+            life_element=self.life_element_var.get()
         )
+    
+    def toggle_thai_inputs(self):
+        """Enable/disable Thai element inputs"""
+        if self.use_thai_element_var.get():
+            self.birth_month_combo.configure(state="normal")
+            self.birth_year_spin.configure(state="normal")
+            self.calculate_life_element()
+        else:
+            self.birth_month_combo.configure(state="disabled")
+            self.birth_year_spin.configure(state="disabled")
+            self.life_element_var.set("Not calculated")
+    
+    def calculate_life_element(self, *args):
+        """Calculate and display Thai life element"""
+        if not self.use_thai_element_var.get():
+            return
+            
+        try:
+            thai_calculator = ThaiElementCalculator()
+            element = thai_calculator.calculate_life_element(
+                self.birth_month_var.get(), 
+                self.birth_year_var.get()
+            )
+            
+            element_info = thai_calculator.get_element_info(element)
+            if element_info:
+                display_text = f"{element_info['name_english']}"
+                self.life_element_var.set(display_text)
+            else:
+                self.life_element_var.set("Calculation error")
+                
+        except Exception as e:
+            self.life_element_var.set("Calculation error")
     
     def calculate_targets(self):
         """Calculate and display nutritional targets"""
@@ -940,7 +1207,14 @@ class HealthDrivenFoodRecommenderGUI:
             
             # Update explanation
             self.explanation_text.delete(1.0, tk.END)
-            self.explanation_text.insert(tk.END, self.current_targets.explanation)
+            explanation_content = self.current_targets.explanation
+            
+            # Add Thai element guidance if enabled
+            if self.current_targets.thai_element_guidance:
+                explanation_content += "\n\n" + "="*50 + "\n"
+                explanation_content += self.current_targets.thai_element_guidance
+                
+            self.explanation_text.insert(tk.END, explanation_content)
             
             # Update targets table
             for item in self.targets_tree.get_children():
@@ -957,6 +1231,15 @@ class HealthDrivenFoodRecommenderGUI:
                 ("Sodium", f"{self.current_targets.sodium_mg:.0f}", "mg/day", "AHA <2300mg (<1500mg HT)"),
                 ("Potassium", f"{self.current_targets.potassium_mg:.0f}", "mg/day", "General recommendation"),
             ]
+            
+            # Add Thai element info if enabled
+            if profile.use_thai_element and profile.life_element != "Not calculated":
+                thai_calculator = ThaiElementCalculator()
+                element = thai_calculator.calculate_life_element(profile.birth_month, profile.birth_year)
+                element_info = thai_calculator.get_element_info(element)
+                if element_info:
+                    targets_data.append(("Thai Element", element_info['name_english'], "", "Traditional Medicine"))
+                    targets_data.append(("Element Focus", element_info['nutritional_focus'], "", "Traditional Guidance"))
             
             for data in targets_data:
                 self.targets_tree.insert("", tk.END, values=data)
@@ -1100,6 +1383,21 @@ class HealthDrivenFoodRecommenderGUI:
                 for condition, score in rec_details['health_scores'].items():
                     suitability = "Excellent" if score < 2 else "Good" if score < 5 else "Fair"
                     details += f"• {condition}: {score:.1f} ({suitability})\n"
+            
+            # Add Thai element compatibility if enabled
+            if 'thai_element_score' in rec_details and rec_details['thai_element_score'] > 0:
+                profile = self.get_health_profile()
+                if profile.use_thai_element:
+                    thai_calculator = ThaiElementCalculator()
+                    element = thai_calculator.calculate_life_element(profile.birth_month, profile.birth_year)
+                    element_info = thai_calculator.get_element_info(element)
+                    
+                    details += f"\nThai Traditional Medicine:\n"
+                    details += f"• Your Life Element: {element_info['name_english']}\n"
+                    
+                    element_score = rec_details['thai_element_score']
+                    compatibility = "Excellent" if element_score < 3 else "Good" if element_score < 6 else "Fair"
+                    details += f"• Element Compatibility: {compatibility} (Score: {element_score:.1f})\n"
             
             self.details_text.delete(1.0, tk.END)
             self.details_text.insert(tk.END, details)
