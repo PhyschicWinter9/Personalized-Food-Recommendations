@@ -1,0 +1,143 @@
+================================================================================
+RANDOM FOREST MODEL PERFORMANCE REPORT
+================================================================================
+Generated: 2025-05-23 14:42:39
+
+CLASSIFICATION PERFORMANCE:
+----------------------------------------
+
+Condition: Diabetes
+  Accuracy:  0.9868
+  Precision: 0.9870
+  Recall:    0.9868
+  F1-Score:  0.9865
+  AUC Score: 0.9985
+  Test Samples: 76
+  Class 0 (Not Suitable) - Precision: 0.985, Recall: 1.000
+  Class 1 (Suitable) - Precision: 1.000, Recall: 0.900
+
+Condition: Obesity
+  Accuracy:  0.9868
+  Precision: 0.9871
+  Recall:    0.9868
+  F1-Score:  0.9867
+  AUC Score: 0.9975
+  Test Samples: 76
+  Class 0 (Not Suitable) - Precision: 1.000, Recall: 0.955
+  Class 1 (Suitable) - Precision: 0.982, Recall: 1.000
+
+
+REGRESSION PERFORMANCE:
+----------------------------------------
+
+Target: Overall_Health
+  R² Score:  0.9244
+  RMSE:      0.1925
+  MAE:       0.0868
+  MAPE:      9.52%
+  Test Samples: 76
+
+Target: Diabetes_Score
+  R² Score:  0.9448
+  RMSE:      0.3879
+  MAE:       0.1216
+  MAPE:      5.13%
+  Test Samples: 76
+
+Target: Obesity_Score
+  R² Score:  0.9147
+  RMSE:      0.4095
+  MAE:       0.2051
+  MAPE:      10.45%
+  Test Samples: 76
+
+
+OVERALL CLASSIFICATION SUMMARY:
+----------------------------------------
+Average Accuracy:  0.9868
+Average Precision: 0.9871
+Average Recall:    0.9868
+Average F1-Score:  0.9866
+
+
+OVERALL REGRESSION SUMMARY:
+----------------------------------------
+Average R² Score: 0.9280
+Average RMSE:     0.3300
+
+================================================================================
+
+DETAILED METRICS:
+==================================================
+
+Model: Random Forest
+Target/Condition: Overall_Health
+mse: 0.03704245950150731
+rmse: 0.19246417719021716
+mae: 0.08684232301872104
+r2_score: 0.9243979850755277
+mape: 9.524951054723012
+test_samples: 76
+timestamp: 2025-05-23 14:42:34
+cv_scores: [0.81769093 0.82298831 0.9174588  0.93487932 0.86447089]
+cv_mean: 0.8714976508666512
+cv_std: 0.047806606426633126
+------------------------------
+
+Model: Random Forest
+Target/Condition: Diabetes_Score
+mse: 0.1504745801375131
+rmse: 0.38791053109900625
+mae: 0.12163481620718461
+r2_score: 0.9447769883329822
+mape: 5.127892822333611
+test_samples: 76
+timestamp: 2025-05-23 14:42:34
+cv_scores: [0.86002544 0.94811124 0.85274548 0.99667684 0.90965072]
+cv_mean: 0.9134419441758045
+cv_std: 0.05418812807383205
+------------------------------
+
+Model: Random Forest
+Target/Condition: Obesity_Score
+mse: 0.16769237097099082
+rmse: 0.4095025896999808
+mae: 0.20505055251765777
+r2_score: 0.9147066630214474
+mape: 10.450804726462621
+test_samples: 76
+timestamp: 2025-05-23 14:42:35
+cv_scores: [0.60547841 0.6839109  0.94597316 0.94648669 0.88622493]
+cv_mean: 0.8136148172415643
+cv_std: 0.14183776949413016
+------------------------------
+
+Model: Random Forest
+Target/Condition: Diabetes
+accuracy: 0.9868421052631579
+precision: 0.9870384917517675
+recall: 0.9868421052631579
+f1_score: 0.9865453106450337
+auc_score: 0.9984848484848485
+test_samples: 76
+timestamp: 2025-05-23 14:42:35
+cv_accuracy: {'cv_scores': array([1.        , 1.        , 1.        , 1.        , 0.97333333]), 'cv_mean': np.float64(0.9946666666666667), 'cv_std': np.float64(0.010666666666666647)}
+cv_precision_weighted: {'cv_scores': array([0.93107769, 0.97777778, 1.        , 0.98686869, 1.        ]), 'cv_mean': np.float64(0.9791448317764108), 'cv_std': np.float64(0.025463120660116866)}
+cv_recall_weighted: {'cv_scores': array([0.85526316, 0.97333333, 1.        , 0.98666667, 1.        ]), 'cv_mean': np.float64(0.9630526315789474), 'cv_std': np.float64(0.05479434676184722)}
+cv_f1_weighted: {'cv_scores': array([0.87436333, 0.97433712, 1.        , 0.98636668, 1.        ]), 'cv_mean': np.float64(0.9670134257890142), 'cv_std': np.float64(0.04730423617934738)}
+------------------------------
+
+Model: Random Forest
+Target/Condition: Obesity
+accuracy: 0.9868421052631579
+precision: 0.9870813397129187
+recall: 0.9868421052631579
+f1_score: 0.9867494638024548
+auc_score: 0.9974747474747475
+test_samples: 76
+timestamp: 2025-05-23 14:42:37
+cv_accuracy: {'cv_scores': array([0.96052632, 0.98666667, 0.97333333, 0.98666667, 0.96      ]), 'cv_mean': np.float64(0.9734385964912281), 'cv_std': np.float64(0.011809298286011873)}
+cv_precision_weighted: {'cv_scores': array([0.90829346, 0.90602757, 1.        , 1.        , 0.95985891]), 'cv_mean': np.float64(0.9548359872745837), 'cv_std': np.float64(0.04160114005595052)}
+cv_recall_weighted: {'cv_scores': array([0.86842105, 0.90666667, 1.        , 1.        , 0.96      ]), 'cv_mean': np.float64(0.9470175438596492), 'cv_std': np.float64(0.052131424704053124)}
+cv_f1_weighted: {'cv_scores': array([0.8733161 , 0.90453644, 1.        , 1.        , 0.9597218 ]), 'cv_mean': np.float64(0.9475148677111447), 'cv_std': np.float64(0.051011743169314734)}
+------------------------------

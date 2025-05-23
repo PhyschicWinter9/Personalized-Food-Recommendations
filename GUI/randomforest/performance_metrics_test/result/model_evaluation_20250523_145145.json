@@ -1,0 +1,338 @@
+{
+  "regression_Overall_Health": {
+    "model_name": "RF_Reg_Overall_Health",
+    "timestamp": "2025-05-23T14:51:40.699436",
+    "regression_metrics": {
+      "train_r2": 0.9870146905856744,
+      "test_r2": 0.9243979850755277,
+      "train_mse": 0.005363167245092017,
+      "test_mse": 0.03704245950150729,
+      "train_rmse": 0.07323364831204313,
+      "test_rmse": 0.1924641771902171,
+      "train_mae": 0.032836143879268864,
+      "test_mae": 0.08684232301872101,
+      "overfitting_score": 0.06261670551014664,
+      "is_overfitting": false,
+      "cv_r2_mean": 0.8714976508666512,
+      "cv_r2_std": 0.04780660642663307
+    }
+  },
+  "regression_Diabetes_Score": {
+    "model_name": "RF_Reg_Diabetes_Score",
+    "timestamp": "2025-05-23T14:51:41.204773",
+    "regression_metrics": {
+      "train_r2": 0.9890757096913908,
+      "test_r2": 0.9447769883329822,
+      "train_mse": 0.02252212380524587,
+      "test_mse": 0.1504745801375131,
+      "train_rmse": 0.15007372789814302,
+      "test_rmse": 0.38791053109900625,
+      "train_mae": 0.04302349206349208,
+      "test_mae": 0.12163481620718464,
+      "overfitting_score": 0.04429872135840862,
+      "is_overfitting": false,
+      "cv_r2_mean": 0.9134419441758045,
+      "cv_r2_std": 0.05418812807383205
+    }
+  },
+  "regression_Obesity_Score": {
+    "model_name": "RF_Reg_Obesity_Score",
+    "timestamp": "2025-05-23T14:51:41.683564",
+    "regression_metrics": {
+      "train_r2": 0.9795396580491139,
+      "test_r2": 0.9147066630214474,
+      "train_mse": 0.04085225542480306,
+      "test_mse": 0.16769237097099077,
+      "train_rmse": 0.20211940882756177,
+      "test_rmse": 0.4095025896999807,
+      "train_mae": 0.0819068831168831,
+      "test_mae": 0.20505055251765772,
+      "overfitting_score": 0.06483299502766648,
+      "is_overfitting": false,
+      "cv_r2_mean": 0.8136148172415645,
+      "cv_r2_std": 0.14183776949413013
+    }
+  },
+  "regression_Hypertension_Score": {
+    "model_name": "RF_Reg_Hypertension_Score",
+    "timestamp": "2025-05-23T14:51:42.164446",
+    "regression_metrics": {
+      "train_r2": 1.0,
+      "test_r2": 1.0,
+      "train_mse": 0.0,
+      "test_mse": 0.0,
+      "train_rmse": 0.0,
+      "test_rmse": 0.0,
+      "train_mae": 0.0,
+      "test_mae": 0.0,
+      "overfitting_score": 0.0,
+      "is_overfitting": false,
+      "cv_r2_mean": 1.0,
+      "cv_r2_std": 0.0
+    }
+  },
+  "regression_Cholesterol_Score": {
+    "model_name": "RF_Reg_Cholesterol_Score",
+    "timestamp": "2025-05-23T14:51:42.614852",
+    "regression_metrics": {
+      "train_r2": 1.0,
+      "test_r2": 1.0,
+      "train_mse": 0.0,
+      "test_mse": 0.0,
+      "train_rmse": 0.0,
+      "test_rmse": 0.0,
+      "train_mae": 0.0,
+      "test_mae": 0.0,
+      "overfitting_score": 0.0,
+      "is_overfitting": false,
+      "cv_r2_mean": 1.0,
+      "cv_r2_std": 0.0
+    }
+  },
+  "classification_Overall_Healthy": {
+    "model_name": "RF_Cls_Overall_Healthy",
+    "timestamp": "2025-05-23T14:51:43.089889",
+    "classification_metrics": {
+      "train_accuracy": 0.9933333333333333,
+      "test_accuracy": 0.9736842105263158,
+      "precision": 0.9736842105263158,
+      "recall": 0.9736842105263158,
+      "f1_score": 0.9736842105263158,
+      "precision_macro": 0.9301470588235294,
+      "recall_macro": 0.9301470588235294,
+      "f1_score_macro": 0.9301470588235294,
+      "roc_auc": 0.9963235294117647,
+      "confusion_matrix": [
+        [
+          7,
+          1
+        ],
+        [
+          1,
+          67
+        ]
+      ],
+      "detailed_report": {
+        "0": {
+          "precision": 0.875,
+          "recall": 0.875,
+          "f1-score": 0.875,
+          "support": 8.0
+        },
+        "1": {
+          "precision": 0.9852941176470589,
+          "recall": 0.9852941176470589,
+          "f1-score": 0.9852941176470589,
+          "support": 68.0
+        },
+        "accuracy": 0.9736842105263158,
+        "macro avg": {
+          "precision": 0.9301470588235294,
+          "recall": 0.9301470588235294,
+          "f1-score": 0.9301470588235294,
+          "support": 76.0
+        },
+        "weighted avg": {
+          "precision": 0.9736842105263158,
+          "recall": 0.9736842105263158,
+          "f1-score": 0.9736842105263158,
+          "support": 76.0
+        }
+      },
+      "cv_f1_mean": 0.981387869488373,
+      "cv_f1_std": 0.010803216009590893
+    }
+  },
+  "classification_Diabetes_Suitable": {
+    "model_name": "RF_Cls_Diabetes_Suitable",
+    "timestamp": "2025-05-23T14:51:43.649135",
+    "classification_metrics": {
+      "train_accuracy": 1.0,
+      "test_accuracy": 0.9736842105263158,
+      "precision": 0.9755639097744361,
+      "recall": 0.9736842105263158,
+      "f1_score": 0.9739030114969963,
+      "precision_macro": 0.9642857142857143,
+      "recall_macro": 0.98,
+      "f1_score_macro": 0.9712773998488284,
+      "roc_auc": 0.9969230769230769,
+      "confusion_matrix": [
+        [
+          26,
+          0
+        ],
+        [
+          2,
+          48
+        ]
+      ],
+      "detailed_report": {
+        "0": {
+          "precision": 0.9285714285714286,
+          "recall": 1.0,
+          "f1-score": 0.9629629629629629,
+          "support": 26.0
+        },
+        "1": {
+          "precision": 1.0,
+          "recall": 0.96,
+          "f1-score": 0.9795918367346939,
+          "support": 50.0
+        },
+        "accuracy": 0.9736842105263158,
+        "macro avg": {
+          "precision": 0.9642857142857143,
+          "recall": 0.98,
+          "f1-score": 0.9712773998488284,
+          "support": 76.0
+        },
+        "weighted avg": {
+          "precision": 0.9755639097744361,
+          "recall": 0.9736842105263158,
+          "f1-score": 0.9739030114969963,
+          "support": 76.0
+        }
+      },
+      "cv_f1_mean": 0.9840685614313065,
+      "cv_f1_std": 0.009938571059194188
+    }
+  },
+  "classification_Obesity_Suitable": {
+    "model_name": "RF_Cls_Obesity_Suitable",
+    "timestamp": "2025-05-23T14:51:44.207364",
+    "classification_metrics": {
+      "train_accuracy": 0.9966666666666667,
+      "test_accuracy": 0.9868421052631579,
+      "precision": 0.9870813397129187,
+      "recall": 0.9868421052631579,
+      "f1_score": 0.9867494638024548,
+      "precision_macro": 0.990909090909091,
+      "recall_macro": 0.9772727272727273,
+      "f1_score_macro": 0.9837849370599531,
+      "roc_auc": 0.9974747474747475,
+      "confusion_matrix": [
+        [
+          21,
+          1
+        ],
+        [
+          0,
+          54
+        ]
+      ],
+      "detailed_report": {
+        "0": {
+          "precision": 1.0,
+          "recall": 0.9545454545454546,
+          "f1-score": 0.9767441860465116,
+          "support": 22.0
+        },
+        "1": {
+          "precision": 0.9818181818181818,
+          "recall": 1.0,
+          "f1-score": 0.9908256880733946,
+          "support": 54.0
+        },
+        "accuracy": 0.9868421052631579,
+        "macro avg": {
+          "precision": 0.990909090909091,
+          "recall": 0.9772727272727273,
+          "f1-score": 0.9837849370599531,
+          "support": 76.0
+        },
+        "weighted avg": {
+          "precision": 0.9870813397129187,
+          "recall": 0.9868421052631579,
+          "f1-score": 0.9867494638024548,
+          "support": 76.0
+        }
+      },
+      "cv_f1_mean": 0.9733502021049635,
+      "cv_f1_std": 0.011898495967027337
+    }
+  },
+  "classification_Hypertension_Suitable": {
+    "model_name": "RF_Cls_Hypertension_Suitable",
+    "timestamp": "2025-05-23T14:51:44.760760",
+    "classification_metrics": {
+      "train_accuracy": 1.0,
+      "test_accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "f1_score_macro": 1.0,
+      "confusion_matrix": [
+        [
+          76
+        ]
+      ],
+      "detailed_report": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 76.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 76.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 76.0
+        }
+      },
+      "cv_f1_mean": 1.0,
+      "cv_f1_std": 0.0
+    }
+  },
+  "classification_Cholesterol_Suitable": {
+    "model_name": "RF_Cls_Cholesterol_Suitable",
+    "timestamp": "2025-05-23T14:51:45.332117",
+    "classification_metrics": {
+      "train_accuracy": 1.0,
+      "test_accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "precision_macro": 1.0,
+      "recall_macro": 1.0,
+      "f1_score_macro": 1.0,
+      "confusion_matrix": [
+        [
+          76
+        ]
+      ],
+      "detailed_report": {
+        "1": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 76.0
+        },
+        "accuracy": 1.0,
+        "macro avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 76.0
+        },
+        "weighted avg": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 76.0
+        }
+      },
+      "cv_f1_mean": 1.0,
+      "cv_f1_std": 0.0
+    }
+  }
+}
