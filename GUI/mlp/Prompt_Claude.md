@@ -1,8 +1,8 @@
-# Health-Driven Food Recommendation System Using KNN
+# Health-Driven Food Recommendation System Using MLP
 
-I need help implementing a **health-driven K-Nearest Neighbors (KNN) model** for a personalized food recommendation system that automatically calculates nutritional needs based on medical guidelines rather than user guesses. This system will analyze Thai food datasets to provide scientifically-based recommendations using established medical formulas and health condition modifications.
+I need help implementing a **health-driven Multi-layer Perceptron (MLP) model** for a personalized food recommendation system that automatically calculates nutritional needs based on medical guidelines rather than user guesses. This system will analyze Thai food datasets to provide scientifically-based recommendations using established medical formulas and health condition modifications.
 
-**Key Improvement:** The system should automatically calculate personalized nutritional targets using BMR/TDEE formulas and health condition guidelines, then use KNN to find matching foods - eliminating the confusing "manual target setting" approach.
+**Key Improvement:** The system should automatically calculate personalized nutritional targets using BMR/TDEE formulas and health condition guidelines, then use MLP to find matching foods - eliminating the confusing "manual target setting" approach.
 
 ## Nutritional Guidelines Analysis
 
@@ -23,25 +23,25 @@ Please analyze these nutritional guideline files to establish medical-grade calc
 - Weight goal adjustments (deficit for weight loss, surplus for weight gain)
 - Age and gender-specific adjustments based on DRI guidelines
 
-### 2. Thai Food Dataset Preparation for Health-Driven KNN
+### 2. Thai Food Dataset Preparation for Health-Driven MLP
 
 - Processing datasets: `processed_food.csv`, `Fruit.csv`, `Drinking.csv`, `esan_food.csv`, `curry.csv`, `meat.csv`, `vegetables.csv`, `cracker.csv`, `dessert.csv`, `noodle.csv`, `onedish.csv`
 - Feature engineering focused on health condition suitability scores
 - Nutritional density calculations and portion size standardization
 - Missing value handling for critical nutrients (Na, K, saturated fat, cholesterol)
 
-### 3. Health-Condition-Aware KNN Implementation
+### 3. Health-Condition-Aware MLP Implementation
 
-- **Input:** User profile (age, gender, weight, height, activity, health conditions) → **Output:** Calculated nutritional targets → KNN matching
+- **Input:** User profile (age, gender, weight, height, activity, health conditions) → **Output:** Calculated nutritional targets → MLP matching
 - Custom distance metrics that prioritize health-critical nutrients (sugar for diabetes, sodium for hypertension)
 - Feature scaling that preserves medical significance of nutritional ratios
 - Health suitability scoring algorithm based on established medical guidelines
 - Multi-objective optimization: nutritional similarity + health condition compliance
 
-### 4. Advanced KNN Optimization
+### 4. Advanced MLP Optimization
 
 - Cross-validation for optimal k values considering health condition clustering
-- Weighted KNN with health condition penalties/bonuses
+- Weighted MLP with health condition penalties/bonuses
 - Dimensionality reduction techniques that preserve medical interpretability
 - Efficient user profile vector creation from calculated (not manually set) targets
 
@@ -61,7 +61,7 @@ Please analyze these nutritional guideline files to establish medical-grade calc
 
 ## Key Technical Innovation
 
-The system should eliminate user confusion by automatically calculating what they need (based on medical science) rather than asking them to guess their nutritional targets. The KNN algorithm should then find foods that match these scientifically-calculated needs.
+The system should eliminate user confusion by automatically calculating what they need (based on medical science) rather than asking them to guess their nutritional targets. The MLP algorithm should then find foods that match these scientifically-calculated needs.
 
 ## Research Context
 
@@ -70,7 +70,7 @@ This is for my Master's thesis at **Prince of Songkla University, Surat Thani Ca
 ## Expected Deliverables
 
 1. Complete health-driven recommendation engine with medical calculations
-2. KNN implementation optimized for nutritional similarity and health compliance
+2. MLP implementation optimized for nutritional similarity and health compliance
 3. Modern GUI showing the calculation process and explanations
 4. API version for broader application integration
 5. Evaluation framework comparing against manual target-setting approaches
@@ -86,9 +86,9 @@ The goal is to create a system that works like a **digital nutritionist** - calc
 
 Raw text
 
-I need help implementing a health-driven K-Nearest Neighbors (KNN) model for a personalized food recommendation system that automatically calculates nutritional needs based on medical guidelines rather than user guesses. This system will analyze Thai food datasets to provide scientifically-based recommendations using established medical formulas and health condition modifications.
+I need help implementing a health-driven Multi-layer Perceptron (MLP) model for a personalized food recommendation system that automatically calculates nutritional needs based on medical guidelines rather than user guesses. This system will analyze Thai food datasets to provide scientifically-based recommendations using established medical formulas and health condition modifications.
 
-Key Improvement: The system should automatically calculate personalized nutritional targets using BMR/TDEE formulas and health condition guidelines, then use KNN to find matching foods - eliminating the confusing "manual target setting" approach.
+Key Improvement: The system should automatically calculate personalized nutritional targets using BMR/TDEE formulas and health condition guidelines, then use MLP to find matching foods - eliminating the confusing "manual target setting" approach.
 
 Please analyze these nutritional guideline files to establish medical-grade calculation rules:
 1. NCD_Nutritional_Guidelines_ChatGPT.md
@@ -105,22 +105,22 @@ Then guide me through implementing:
 - Weight goal adjustments (deficit for weight loss, surplus for weight gain)
 - Age and gender-specific adjustments based on DRI guidelines
 
-2. Thai Food Dataset Preparation for Health-Driven KNN:
+2. Thai Food Dataset Preparation for Health-Driven MLP:
 - Processing datasets: processed_food.csv, Fruit.csv, Drinking.csv, esan_food.csv, curry.csv, meat.csv, vegetables.csv, cracker.csv, dessert.csv, noodle.csv, onedish.csv
 - Feature engineering focused on health condition suitability scores
 - Nutritional density calculations and portion size standardization
 - Missing value handling for critical nutrients (Na, K, saturated fat, cholesterol)
 
-3. Health-Condition-Aware KNN Implementation:
-- Input: User profile (age, gender, weight, height, activity, health conditions) → Output: Calculated nutritional targets → KNN matching
+3. Health-Condition-Aware MLP Implementation:
+- Input: User profile (age, gender, weight, height, activity, health conditions) → Output: Calculated nutritional targets → MLP matching
 - Custom distance metrics that prioritize health-critical nutrients (sugar for diabetes, sodium for hypertension)
 - Feature scaling that preserves medical significance of nutritional ratios
 - Health suitability scoring algorithm based on established medical guidelines
 - Multi-objective optimization: nutritional similarity + health condition compliance
 
-4. Advanced KNN Optimization:
+4. Advanced MLP Optimization:
 - Cross-validation for optimal k values considering health condition clustering
-- Weighted KNN with health condition penalties/bonuses
+- Weighted MLP with health condition penalties/bonuses
 - Dimensionality reduction techniques that preserve medical interpretability
 - Efficient user profile vector creation from calculated (not manually set) targets
 
@@ -136,13 +136,13 @@ Then guide me through implementing:
 - Explanation System: Clear rationale for why specific foods are recommended
 - Real-time Updates: Recommendations change when health profile changes
 
-Key Technical Innovation: The system should eliminate user confusion by automatically calculating what they need (based on medical science) rather than asking them to guess their nutritional targets. The KNN algorithm should then find foods that match these scientifically-calculated needs.
+Key Technical Innovation: The system should eliminate user confusion by automatically calculating what they need (based on medical science) rather than asking them to guess their nutritional targets. The MLP algorithm should then find foods that match these scientifically-calculated needs.
 
 Research Context: This is for my Master's thesis at Prince of Songkla University, Surat Thani Campus, focusing on "Health and Biometric Data-Driven Food Recommendation System" for Thai populations with NCDs. The system must be medically accurate, culturally appropriate, and eliminate the common UX problem of requiring users to set their own nutritional targets.
 
 Expected Deliverables:
 1. Complete health-driven recommendation engine with medical calculations
-2. KNN implementation optimized for nutritional similarity and health compliance
+2. MLP implementation optimized for nutritional similarity and health compliance
 3. Modern GUI showing the calculation process and explanations
 4. API version for broader application integration
 5. Evaluation framework comparing against manual target-setting approaches
@@ -154,11 +154,11 @@ The details are in the Research Proposal - En - Edit_Gramma file.
 
 
 V2
-# Health-Driven Food Recommendation System Using KNN
+# Health-Driven Food Recommendation System Using MLP
 
-I need help implementing a **health-driven K-Nearest Neighbors (KNN) model** for a personalized food recommendation system that automatically calculates nutritional needs based on medical guidelines rather than user guesses. This system will analyze Thai food datasets to provide scientifically-based recommendations using established medical formulas and health condition modifications.
+I need help implementing a **health-driven Multi-layer Perceptron (MLP) model** for a personalized food recommendation system that automatically calculates nutritional needs based on medical guidelines rather than user guesses. This system will analyze Thai food datasets to provide scientifically-based recommendations using established medical formulas and health condition modifications.
 
-**Key Improvement:** The system should automatically calculate personalized nutritional targets using BMR/TDEE formulas and health condition guidelines, then use KNN to find matching foods - eliminating the confusing "manual target setting" approach.
+**Key Improvement:** The system should automatically calculate personalized nutritional targets using BMR/TDEE formulas and health condition guidelines, then use MLP to find matching foods - eliminating the confusing "manual target setting" approach.
 
 ## Nutritional Guidelines Analysis
 
@@ -179,25 +179,25 @@ Please analyze these nutritional guideline files to establish medical-grade calc
 - Weight goal adjustments (deficit for weight loss, surplus for weight gain)
 - Age and gender-specific adjustments based on DRI guidelines
 
-### 2. Thai Food Dataset Preparation for Health-Driven KNN
+### 2. Thai Food Dataset Preparation for Health-Driven MLP
 
 - Processing datasets: `processed_food.csv`, `Fruit.csv`, `Drinking.csv`, `esan_food.csv`, `curry.csv`, `meat.csv`, `vegetables.csv`, `cracker.csv`, `dessert.csv`, `noodle.csv`, `onedish.csv`
 - Feature engineering focused on health condition suitability scores
 - Nutritional density calculations and portion size standardization
 - Missing value handling for critical nutrients (Na, K, saturated fat, cholesterol)
 
-### 3. Health-Condition-Aware KNN Implementation
+### 3. Health-Condition-Aware MLP Implementation
 
-- **Input:** User profile (age, gender, weight, height, activity, health conditions) → **Output:** Calculated nutritional targets → KNN matching
+- **Input:** User profile (age, gender, weight, height, activity, health conditions) → **Output:** Calculated nutritional targets → MLP matching
 - Custom distance metrics that prioritize health-critical nutrients (sugar for diabetes, sodium for hypertension)
 - Feature scaling that preserves medical significance of nutritional ratios
 - Health suitability scoring algorithm based on established medical guidelines
 - Multi-objective optimization: nutritional similarity + health condition compliance
 
-### 4. Advanced KNN Optimization
+### 4. Advanced MLP Optimization
 
 - Cross-validation for optimal k values considering health condition clustering
-- Weighted KNN with health condition penalties/bonuses
+- Weighted MLP with health condition penalties/bonuses
 - Dimensionality reduction techniques that preserve medical interpretability
 - Efficient user profile vector creation from calculated (not manually set) targets
 
@@ -217,7 +217,7 @@ Please analyze these nutritional guideline files to establish medical-grade calc
 
 ## Key Technical Innovation
 
-The system should eliminate user confusion by automatically calculating what they need (based on medical science) rather than asking them to guess their nutritional targets. The KNN algorithm should then find foods that match these scientifically-calculated needs.
+The system should eliminate user confusion by automatically calculating what they need (based on medical science) rather than asking them to guess their nutritional targets. The MLP algorithm should then find foods that match these scientifically-calculated needs.
 
 ## Research Context
 
@@ -226,7 +226,7 @@ This is for my Master's thesis at **Prince of Songkla University, Surat Thani Ca
 ## Expected Deliverables
 
 1. Complete health-driven recommendation engine with medical calculations
-2. KNN implementation optimized for nutritional similarity and health compliance
+2. MLP implementation optimized for nutritional similarity and health compliance
 3. Modern GUI showing the calculation process and explanations
 4. API version for broader application integration
 5. Evaluation framework comparing against manual target-setting approaches
@@ -241,8 +241,8 @@ The goal is to create a system that works like a **digital nutritionist** - calc
 
 Raw text
 
-I need help implementing a health-driven K-Nearest Neighbors (KNN) model for a personalized food recommendation system that automatically calculates nutritional needs based on medical guidelines rather than user guesses. This system will analyze Thai food datasets to provide scientifically-based recommendations using established medical formulas and health condition modifications.
-Key Improvement: The system should automatically calculate personalized nutritional targets using BMR/TDEE formulas and health condition guidelines, then use KNN to find matching foods - eliminating the confusing "manual target setting" approach.
+I need help implementing a health-driven K-Nearest Neighbors (MLP) model for a personalized food recommendation system that automatically calculates nutritional needs based on medical guidelines rather than user guesses. This system will analyze Thai food datasets to provide scientifically-based recommendations using established medical formulas and health condition modifications.
+Key Improvement: The system should automatically calculate personalized nutritional targets using BMR/TDEE formulas and health condition guidelines, then use MLP to find matching foods - eliminating the confusing "manual target setting" approach.
 Nutritional Guidelines Analysis
 Please analyze these nutritional guideline files to establish medical-grade calculation rules:
 
@@ -260,25 +260,25 @@ Health condition modifications (diabetes → reduced sugar/carbs, hypertension �
 Weight goal adjustments (deficit for weight loss, surplus for weight gain)
 Age and gender-specific adjustments based on DRI guidelines
 
-2. Thai Food Dataset Preparation for Health-Driven KNN
+2. Thai Food Dataset Preparation for Health-Driven MLP
 
 Processing datasets: processed_food.csv, Fruit.csv, Drinking.csv, esan_food.csv, curry.csv, meat.csv, vegetables.csv, cracker.csv, dessert.csv, noodle.csv, onedish.csv
 Feature engineering focused on health condition suitability scores
 Nutritional density calculations and portion size standardization
 Missing value handling for critical nutrients (Na, K, saturated fat, cholesterol)
 
-3. Health-Condition-Aware KNN Implementation
+3. Health-Condition-Aware MLP Implementation
 
-Input: User profile (age, gender, weight, height, activity, health conditions) → Output: Calculated nutritional targets → KNN matching
+Input: User profile (age, gender, weight, height, activity, health conditions) → Output: Calculated nutritional targets → MLP matching
 Custom distance metrics that prioritize health-critical nutrients (sugar for diabetes, sodium for hypertension)
 Feature scaling that preserves medical significance of nutritional ratios
 Health suitability scoring algorithm based on established medical guidelines
 Multi-objective optimization: nutritional similarity + health condition compliance
 
-4. Advanced KNN Optimization
+4. Advanced MLP Optimization
 
 Cross-validation for optimal k values considering health condition clustering
-Weighted KNN with health condition penalties/bonuses
+Weighted MLP with health condition penalties/bonuses
 Dimensionality reduction techniques that preserve medical interpretability
 Efficient user profile vector creation from calculated (not manually set) targets
 
@@ -297,13 +297,13 @@ Explanation System: Clear rationale for why specific foods are recommended
 Real-time Updates: Recommendations change when health profile changes
 
 Key Technical Innovation
-The system should eliminate user confusion by automatically calculating what they need (based on medical science) rather than asking them to guess their nutritional targets. The KNN algorithm should then find foods that match these scientifically-calculated needs.
+The system should eliminate user confusion by automatically calculating what they need (based on medical science) rather than asking them to guess their nutritional targets. The MLP algorithm should then find foods that match these scientifically-calculated needs.
 Research Context
 This is for my Master's thesis at Prince of Songkla University, Surat Thani Campus, focusing on "Health and Biometric Data-Driven Food Recommendation System" for Thai populations with NCDs. The system must be medically accurate, culturally appropriate, and eliminate the common UX problem of requiring users to set their own nutritional targets.
 Expected Deliverables
 
 Complete health-driven recommendation engine with medical calculations
-KNN implementation optimized for nutritional similarity and health compliance
+MLP implementation optimized for nutritional similarity and health compliance
 Modern GUI showing the calculation process and explanations
 API version for broader application integration
 Evaluation framework comparing against manual target-setting approaches
