@@ -271,15 +271,19 @@ class HealthAwareKNNRecommender:
     
     def update_status(self, message):
         """Update loading status if callback is provided"""
-        if self.status_callback:
-            self.status_callback(message)
-        print(message)
+        try:
+            if self.status_callback:
+                self.status_callback(message)
+            print(message)
+        except Exception as e:
+            # If callback fails, just print the message
+            print(f"Status: {message}")
+            print(f"Status callback error: {e}")
     
     def load_data(self):
         """Load and combine all food datasets from CSV files"""
         try:
             # Look for CSV files in current directory
-            # D:\University\MasterDegree\Project\Personalized-Food-Recommendations\datasets
             dataset_folder = './datasets'  # Adjust path as needed
             csv_files = glob.glob(os.path.join(dataset_folder, '*.csv'))
             
@@ -293,20 +297,40 @@ class HealthAwareKNNRecommender:
             for file_path in csv_files:
                 try:
                     filename = os.path.basename(file_path)
-                    category = os.path.splitext(filename)[0].replace('_', ' ').replace('-', ' ').title()
+                    # Standardize category names
+                    category_map = {
+                        'drinking': 'Beverages',
+                        'esan_food': 'Esan Food',
+                        'fruit': 'Fruits',
+                        'meat': 'Meat & Poultry',
+                        'noodle': 'Noodles',
+                        'onedish': 'One Dish Meals',
+                        'processed_food': 'Processed Food',
+                        'vegetables': 'Vegetables',
+                        'cracker': 'Snacks & Crackers',
+                        'curry': 'Curries',
+                        'dessert': 'Desserts'
+                    }
+                    
+                    base_name = os.path.splitext(filename)[0].lower()
+                    category = category_map.get(base_name, 
+                        os.path.splitext(filename)[0].replace('_', ' ').replace('-', ' ').title())
                     
                     self.update_status(f"Loading {category} data...")
                     
                     df = pd.read_csv(file_path)
                     
-                    if 'Category' not in df.columns:
-                        df['Category'] = category
+                    # Always set category from filename
+                    df['Category'] = category
                     
                     # Clean and standardize data
                     df = self._clean_nutritional_data(df)
                     
-                    dataframes.append(df)
-                    self.update_status(f"Loaded {len(df)} items from {filename}")
+                    if len(df) > 0:  # Only add if data exists
+                        dataframes.append(df)
+                        self.update_status(f"Loaded {len(df)} items from {filename} as {category}")
+                    else:
+                        self.update_status(f"No valid data in {filename}")
                     
                 except Exception as e:
                     self.update_status(f"Error loading {file_path}: {e}")
@@ -315,6 +339,10 @@ class HealthAwareKNNRecommender:
                 self.update_status("Combining all food data...")
                 self.food_data = pd.concat(dataframes, ignore_index=True)
                 self.stats['total_items'] = len(self.food_data)
+                
+                # Debug: print categories found
+                unique_categories = self.food_data['Category'].unique()
+                self.update_status(f"Categories found: {', '.join(unique_categories)}")
                 
                 if 'Category' in self.food_data.columns:
                     self.stats['categories'] = self.food_data['Category'].value_counts().to_dict()
@@ -659,16 +687,43 @@ class HealthAwareKNNRecommender:
             # Get user's health conditions
             health_conditions = user_profile.get('health_conditions', [])
             
-            # Create candidate pool
+            # Start with full dataset
             candidates = self.food_data.copy()
+            self.update_status(f"Starting with {len(candidates)} total food items")
             
             # Apply category filter if specified
             category_filter = user_profile.get('category_filter', 'All')
-            if category_filter != 'All':
-                candidates = candidates[candidates['Category'] == category_filter]
+            self.update_status(f"Category filter selected: {category_filter}")
             
+            if category_filter != 'All' and category_filter is not None:
+                # Debug: show available categories
+                available_categories = candidates['Category'].unique()
+                self.update_status(f"Available categories: {list(available_categories)}")
+                
+                # Filter by category
+                before_filter = len(candidates)
+                candidates = candidates[candidates['Category'] == category_filter]
+                after_filter = len(candidates)
+                
+                self.update_status(f"After category filter: {after_filter} items (was {before_filter})")
+                
+                # If no items found with exact match, try partial match
+                if len(candidates) == 0:
+                    self.update_status(f"No exact match for '{category_filter}', trying partial match...")
+                    candidates = self.food_data[self.food_data['Category'].str.contains(category_filter, case=False, na=False)]
+                    self.update_status(f"Partial match found: {len(candidates)} items")
+                
+                # If still no matches, fall back to all data but warn user
+                if len(candidates) == 0:
+                    self.update_status(f"No items found for category '{category_filter}', using all categories")
+                    candidates = self.food_data.copy()
+            
+            # Final check
             if len(candidates) == 0:
+                self.update_status("No candidate foods available after filtering")
                 return []
+            
+            self.update_status(f"Processing {len(candidates)} candidate foods for KNN matching")
             
             # Create user profile vector based on calculated targets
             user_vector = self._create_user_vector(meal_targets)
@@ -690,6 +745,7 @@ class HealthAwareKNNRecommender:
                 rec['health_warnings'] = self._generate_health_warnings(rec, health_conditions)
                 rec['targets_met'] = self._check_targets_met(rec, meal_targets)
             
+            self.update_status(f"KNN algorithm found {len(recommendations)} recommendations")
             return recommendations
             
         except Exception as e:
@@ -733,22 +789,42 @@ class HealthAwareKNNRecommender:
         # Get recommendations from condition-specific models
         for condition in health_conditions:
             if condition in self.knn_models:
-                # Scale user vector with condition weights
-                condition_weights = self._get_condition_feature_weights(condition)
-                weighted_user_vector = user_vector * condition_weights
-                scaled_user_vector = self.scaler.transform(weighted_user_vector)
-                
-                # Get nearest neighbors
-                distances, indices = self.knn_models[condition].kneighbors(
-                    scaled_user_vector, n_neighbors=min(max_recommendations * 2, len(candidates))
-                )
-                
-                # Create recommendations
-                for dist, idx in zip(distances[0], indices[0]):
-                    if idx < len(candidates):
-                        food = candidates.iloc[idx]
+                try:
+                    # Create feature matrix for candidates only
+                    candidate_features = candidates[self.features].fillna(0)
+                    
+                    if len(candidate_features) == 0:
+                        continue
+                    
+                    # Scale candidate features
+                    candidate_features_scaled = self.scaler.transform(candidate_features)
+                    
+                    # Scale user vector with condition weights
+                    condition_weights = self._get_condition_feature_weights(condition)
+                    weighted_user_vector = user_vector * condition_weights
+                    scaled_user_vector = self.scaler.transform(weighted_user_vector)
+                    
+                    # Calculate distances manually since we're working with a subset
+                    distances = []
+                    for i, candidate_features_row in enumerate(candidate_features_scaled):
+                        # Apply same weights to candidate
+                        weighted_candidate = candidate_features_row * condition_weights
+                        dist = euclidean(scaled_user_vector[0], weighted_candidate)
+                        distances.append((dist, i))
+                    
+                    # Sort by distance and get top recommendations
+                    distances.sort(key=lambda x: x[0])
+                    top_distances = distances[:min(max_recommendations, len(distances))]
+                    
+                    # Create recommendations
+                    for dist, candidate_idx in top_distances:
+                        food = candidates.iloc[candidate_idx]
                         rec = self._create_recommendation_object(food, dist, condition)
                         all_recommendations.append(rec)
+                        
+                except Exception as e:
+                    self.update_status(f"Error in {condition} KNN: {e}")
+                    continue
         
         # If no condition-specific recommendations, use general model
         if not all_recommendations:
@@ -768,21 +844,38 @@ class HealthAwareKNNRecommender:
     
     def _get_general_recommendations(self, user_vector, candidates, max_recommendations):
         """Get general nutritional recommendations"""
-        scaled_user_vector = self.scaler.transform(user_vector)
-        
-        # Get nearest neighbors
-        distances, indices = self.knn_models['general'].kneighbors(
-            scaled_user_vector, n_neighbors=min(max_recommendations, len(candidates))
-        )
-        
-        recommendations = []
-        for dist, idx in zip(distances[0], indices[0]):
-            if idx < len(candidates):
-                food = candidates.iloc[idx]
+        try:
+            # Create feature matrix for candidates only
+            candidate_features = candidates[self.features].fillna(0)
+            
+            if len(candidate_features) == 0:
+                return []
+            
+            # Scale features
+            candidate_features_scaled = self.scaler.transform(candidate_features)
+            scaled_user_vector = self.scaler.transform(user_vector)
+            
+            # Calculate distances manually
+            distances = []
+            for i, candidate_features_row in enumerate(candidate_features_scaled):
+                dist = euclidean(scaled_user_vector[0], candidate_features_row)
+                distances.append((dist, i))
+            
+            # Sort by distance and get top recommendations
+            distances.sort(key=lambda x: x[0])
+            top_distances = distances[:min(max_recommendations, len(distances))]
+            
+            recommendations = []
+            for dist, candidate_idx in top_distances:
+                food = candidates.iloc[candidate_idx]
                 rec = self._create_recommendation_object(food, dist, 'general')
                 recommendations.append(rec)
-        
-        return recommendations
+            
+            return recommendations
+            
+        except Exception as e:
+            self.update_status(f"Error in general KNN: {e}")
+            return []
     
     def _create_recommendation_object(self, food, distance, model_type):
         """Create recommendation object from food data"""
@@ -931,6 +1024,9 @@ class HealthDrivenKNNFoodRecommenderUI:
         # Initialize variables
         self.last_recommendations = []
         self.current_nutritional_data = None
+        
+        # Update category list after recommender is initialized
+        self.update_category_list()
         
         # Update stats
         self.update_stats_display()
@@ -1137,8 +1233,15 @@ class HealthDrivenKNNFoodRecommenderUI:
         categories = ['All']
         if hasattr(self.recommender, 'food_data') and not self.recommender.food_data.empty:
             if 'Category' in self.recommender.food_data.columns:
-                categories.extend(sorted(self.recommender.food_data['Category'].unique()))
+                unique_categories = sorted(self.recommender.food_data['Category'].dropna().unique())
+                categories.extend(unique_categories)
+                print(f"Categories available: {categories}")  # Debug info
         self.category_combo['values'] = categories
+        
+        # Reset to 'All' if current selection is not available
+        current_selection = self.category_var.get()
+        if current_selection not in categories:
+            self.category_var.set('All')
     
     def create_results_panel(self, parent):
         """Create results panel with recommendations table"""
@@ -1227,15 +1330,19 @@ class HealthDrivenKNNFoodRecommenderUI:
     
     def create_status_bar(self):
         """Create status bar"""
-        status_frame = ttk.Frame(self.master, relief=tk.SUNKEN, padding="5")
-        status_frame.pack(side=tk.BOTTOM, fill=tk.X)
+        self.status_frame = ttk.Frame(self.master, relief=tk.SUNKEN, padding="5")
+        self.status_frame.pack(side=tk.BOTTOM, fill=tk.X)
         
         self.status_var = tk.StringVar(value="Ready - Enter your health profile and click 'Calculate Nutrition'")
-        ttk.Label(status_frame, textvariable=self.status_var).pack(side=tk.LEFT)
+        self.status_label = ttk.Label(self.status_frame, textvariable=self.status_var)
+        self.status_label.pack(side=tk.LEFT)
         
         # Stats display
-        self.stats_frame = ttk.Frame(status_frame)
+        self.stats_frame = ttk.Frame(self.status_frame)
         self.stats_frame.pack(side=tk.RIGHT)
+        
+        # Initialize stats label
+        self.stats_label = None
     
     def get_user_profile(self):
         """Get user profile from form inputs"""
@@ -1269,69 +1376,81 @@ class HealthDrivenKNNFoodRecommenderUI:
             nutritional_data = self.recommender.nutrition_calculator.calculate_nutritional_targets(user_profile)
             self.current_nutritional_data = nutritional_data
             
+            # Check if targets_text widget still exists
+            if not hasattr(self, 'targets_text') or not self.targets_text.winfo_exists():
+                messagebox.showerror("Error", "Text widget not available")
+                return
+            
             # Display in targets tab
-            self.targets_text.delete(1.0, tk.END)
-            
-            # Add header
-            self.targets_text.insert(tk.END, "PERSONALIZED NUTRITIONAL TARGETS (KNN-Based Matching)\n", "header")
-            self.targets_text.insert(tk.END, "="*60 + "\n\n", "separator")
-            
-            # Add calculations
-            calc = nutritional_data['calculations']
-            self.targets_text.insert(tk.END, "Medical Calculations:\n", "subheader")
-            self.targets_text.insert(tk.END, f"• {calc['bmr_formula']}\n")
-            self.targets_text.insert(tk.END, f"• {calc['tdee_formula']}\n")
-            self.targets_text.insert(tk.END, f"• {calc['target_formula']}\n\n")
-            
-            # Add daily targets
-            daily = nutritional_data['daily_targets']
-            self.targets_text.insert(tk.END, "Daily Nutritional Targets:\n", "subheader")
-            self.targets_text.insert(tk.END, f"• Calories: {daily['calories']:.0f} kcal\n")
-            self.targets_text.insert(tk.END, f"• Protein: {daily['protein_min']:.0f}-{daily['protein_max']:.0f} g\n")
-            self.targets_text.insert(tk.END, f"• Carbohydrates: {daily['carbs_min']:.0f}-{daily['carbs_max']:.0f} g\n")
-            self.targets_text.insert(tk.END, f"• Sugar (max): {daily['sugar_max']:.0f} g\n")
-            self.targets_text.insert(tk.END, f"• Fiber (min): {daily['fiber_min']:.0f} g\n")
-            self.targets_text.insert(tk.END, f"• Fat: {daily['fat_min']:.0f}-{daily['fat_max']:.0f} g\n")
-            self.targets_text.insert(tk.END, f"• Sodium (max): {daily['sodium_max']:.0f} mg\n\n")
-            
-            # Add meal targets
-            meal_type = self.meal_type_var.get().lower()
-            if meal_type in nutritional_data['meal_targets']:
-                meal = nutritional_data['meal_targets'][meal_type]
-                self.targets_text.insert(tk.END, f"{self.meal_type_var.get()} Targets (KNN Input Vector):\n", "subheader")
-                self.targets_text.insert(tk.END, f"• Calories: {meal['calories']:.0f} kcal\n")
-                self.targets_text.insert(tk.END, f"• Protein: {meal['protein_min']:.0f}-{meal['protein_max']:.0f} g\n")
-                self.targets_text.insert(tk.END, f"• Carbohydrates: {meal['carbs_min']:.0f}-{meal['carbs_max']:.0f} g\n")
-                self.targets_text.insert(tk.END, f"• Sugar (max): {meal['sugar_max']:.0f} g\n")
-                self.targets_text.insert(tk.END, f"• Fiber (min): {meal['fiber_min']:.0f} g\n")
-                self.targets_text.insert(tk.END, f"• Fat: {meal['fat_min']:.0f}-{meal['fat_max']:.0f} g\n\n")
-            
-            # Add health condition info
-            health_conditions = user_profile['health_conditions']
-            if health_conditions:
-                self.targets_text.insert(tk.END, "Health Condition Adjustments (KNN Model Selection):\n", "subheader")
-                for condition in health_conditions:
-                    self.targets_text.insert(tk.END, f"• {condition}: Using specialized KNN model with weighted features\n")
-                self.targets_text.insert(tk.END, "\n")
-            
-            self.targets_text.insert(tk.END, "KNN Algorithm Process:\n", "subheader")
-            self.targets_text.insert(tk.END, "1. Convert your targets into a feature vector\n")
-            self.targets_text.insert(tk.END, "2. Apply health condition feature weights\n")
-            self.targets_text.insert(tk.END, "3. Find nearest neighbors in nutritional space\n")
-            self.targets_text.insert(tk.END, "4. Rank by Euclidean distance (lower = better match)\n")
-            
-            # Configure text tags
-            self.targets_text.tag_configure("header", font=self.fonts['heading'], foreground=self.colors['primary'])
-            self.targets_text.tag_configure("subheader", font=self.fonts['subheading'], foreground=self.colors['secondary'])
-            self.targets_text.tag_configure("separator", foreground=self.colors['text_light'])
-            
-            # Switch to targets tab
-            self.notebook.select(1)
-            
-            self.status_var.set("Nutritional targets calculated - ready for KNN food matching")
-            
+            try:
+                self.targets_text.delete(1.0, tk.END)
+                
+                # Add header
+                self.targets_text.insert(tk.END, "PERSONALIZED NUTRITIONAL TARGETS (KNN-Based Matching)\n", "header")
+                self.targets_text.insert(tk.END, "="*60 + "\n\n", "separator")
+                
+                # Add calculations
+                calc = nutritional_data['calculations']
+                self.targets_text.insert(tk.END, "Medical Calculations:\n", "subheader")
+                self.targets_text.insert(tk.END, f"• {calc['bmr_formula']}\n")
+                self.targets_text.insert(tk.END, f"• {calc['tdee_formula']}\n")
+                self.targets_text.insert(tk.END, f"• {calc['target_formula']}\n\n")
+                
+                # Add daily targets
+                daily = nutritional_data['daily_targets']
+                self.targets_text.insert(tk.END, "Daily Nutritional Targets:\n", "subheader")
+                self.targets_text.insert(tk.END, f"• Calories: {daily['calories']:.0f} kcal\n")
+                self.targets_text.insert(tk.END, f"• Protein: {daily['protein_min']:.0f}-{daily['protein_max']:.0f} g\n")
+                self.targets_text.insert(tk.END, f"• Carbohydrates: {daily['carbs_min']:.0f}-{daily['carbs_max']:.0f} g\n")
+                self.targets_text.insert(tk.END, f"• Sugar (max): {daily['sugar_max']:.0f} g\n")
+                self.targets_text.insert(tk.END, f"• Fiber (min): {daily['fiber_min']:.0f} g\n")
+                self.targets_text.insert(tk.END, f"• Fat: {daily['fat_min']:.0f}-{daily['fat_max']:.0f} g\n")
+                self.targets_text.insert(tk.END, f"• Sodium (max): {daily['sodium_max']:.0f} mg\n\n")
+                
+                # Add meal targets
+                meal_type = self.meal_type_var.get().lower()
+                if meal_type in nutritional_data['meal_targets']:
+                    meal = nutritional_data['meal_targets'][meal_type]
+                    self.targets_text.insert(tk.END, f"{self.meal_type_var.get()} Targets (KNN Input Vector):\n", "subheader")
+                    self.targets_text.insert(tk.END, f"• Calories: {meal['calories']:.0f} kcal\n")
+                    self.targets_text.insert(tk.END, f"• Protein: {meal['protein_min']:.0f}-{meal['protein_max']:.0f} g\n")
+                    self.targets_text.insert(tk.END, f"• Carbohydrates: {meal['carbs_min']:.0f}-{meal['carbs_max']:.0f} g\n")
+                    self.targets_text.insert(tk.END, f"• Sugar (max): {meal['sugar_max']:.0f} g\n")
+                    self.targets_text.insert(tk.END, f"• Fiber (min): {meal['fiber_min']:.0f} g\n")
+                    self.targets_text.insert(tk.END, f"• Fat: {meal['fat_min']:.0f}-{meal['fat_max']:.0f} g\n\n")
+                
+                # Add health condition info
+                health_conditions = user_profile['health_conditions']
+                if health_conditions:
+                    self.targets_text.insert(tk.END, "Health Condition Adjustments (KNN Model Selection):\n", "subheader")
+                    for condition in health_conditions:
+                        self.targets_text.insert(tk.END, f"• {condition}: Using specialized KNN model with weighted features\n")
+                    self.targets_text.insert(tk.END, "\n")
+                
+                self.targets_text.insert(tk.END, "KNN Algorithm Process:\n", "subheader")
+                self.targets_text.insert(tk.END, "1. Convert your targets into a feature vector\n")
+                self.targets_text.insert(tk.END, "2. Apply health condition feature weights\n")
+                self.targets_text.insert(tk.END, "3. Find nearest neighbors in nutritional space\n")
+                self.targets_text.insert(tk.END, "4. Rank by Euclidean distance (lower = better match)\n")
+                
+                # Configure text tags
+                self.targets_text.tag_configure("header", font=self.fonts['heading'], foreground=self.colors['primary'])
+                self.targets_text.tag_configure("subheader", font=self.fonts['subheading'], foreground=self.colors['secondary'])
+                self.targets_text.tag_configure("separator", foreground=self.colors['text_light'])
+                
+                # Switch to targets tab
+                if hasattr(self, 'notebook') and self.notebook.winfo_exists():
+                    self.notebook.select(1)
+                
+                self.status_var.set("Nutritional targets calculated - ready for KNN food matching")
+                
+            except tk.TclError as e:
+                print(f"Text widget error: {e}")
+                messagebox.showerror("Error", "Error updating text display")
+                
         except Exception as e:
             messagebox.showerror("Error", f"Error calculating nutrition targets: {str(e)}")
+            print(f"Nutrition calculation error: {e}")
     
     def get_recommendations(self):
         """Get KNN-based food recommendations"""
@@ -1339,6 +1458,9 @@ class HealthDrivenKNNFoodRecommenderUI:
             if not self.current_nutritional_data:
                 messagebox.showwarning("Warning", "Please calculate nutrition targets first!")
                 return
+            
+            # Update category list in case data was loaded after UI creation
+            self.update_category_list()
             
             user_profile = self.get_user_profile()
             meal_type = self.meal_type_var.get().lower()
@@ -1392,8 +1514,24 @@ class HealthDrivenKNNFoodRecommenderUI:
                 self.status_var.set(f"KNN found {len(recommendations)} optimal foods for {condition_text}")
                 
             else:
-                messagebox.showinfo("No Results", "No suitable foods found matching your criteria.")
-                self.status_var.set("No suitable foods found by KNN algorithm")
+                # Provide more helpful error message
+                category_filter = user_profile.get('category_filter', 'All')
+                if category_filter != 'All':
+                    error_msg = f"No suitable foods found in '{category_filter}' category. Try:\n"
+                    error_msg += "1. Select 'All' categories\n"
+                    error_msg += "2. Choose a different category\n"
+                    error_msg += "3. Adjust your health profile settings"
+                    
+                    # Show available categories
+                    if hasattr(self.recommender, 'food_data') and not self.recommender.food_data.empty:
+                        available_cats = list(self.recommender.food_data['Category'].unique())
+                        error_msg += f"\n\nAvailable categories: {', '.join(available_cats)}"
+                else:
+                    error_msg = "No suitable foods found matching your criteria.\n"
+                    error_msg += "Try adjusting your health profile or meal type settings."
+                
+                messagebox.showinfo("No Results", error_msg)
+                self.status_var.set("No suitable foods found - try different filter settings")
                 
         except Exception as e:
             messagebox.showerror("Error", f"Error getting recommendations: {str(e)}")
@@ -1576,16 +1714,29 @@ class HealthDrivenKNNFoodRecommenderUI:
     def update_stats_display(self):
         """Update statistics display"""
         try:
+            if not hasattr(self, 'stats_frame') or not self.stats_frame.winfo_exists():
+                return
+                
             stats = self.recommender.get_stats()
             
-            # Clear previous stats
-            for widget in self.stats_frame.winfo_children():
-                widget.destroy()
+            # Clear previous stats safely
+            if hasattr(self, 'stats_label') and self.stats_label:
+                try:
+                    self.stats_label.destroy()
+                except tk.TclError:
+                    pass
             
-            # Create stats labels
-            total_items = stats['total_items']
-            num_categories = len(stats['categories'])
-            loading_time = stats['loading_time']
+            # Clear all children of stats_frame
+            for widget in self.stats_frame.winfo_children():
+                try:
+                    widget.destroy()
+                except tk.TclError:
+                    pass
+            
+            # Create new stats display
+            total_items = stats.get('total_items', 0)
+            num_categories = len(stats.get('categories', {}))
+            loading_time = stats.get('loading_time', 0)
             
             stats_text = f"Loaded: {total_items} foods | Categories: {num_categories} | Time: {loading_time:.1f}s"
             
@@ -1593,46 +1744,76 @@ class HealthDrivenKNNFoodRecommenderUI:
                 # Show KNN performance
                 if 'general' in stats['model_performance']:
                     perf = stats['model_performance']['general']
-                    stats_text += f" | KNN Avg Distance: {perf['avg_distance']:.3f}"
+                    avg_dist = perf.get('avg_distance', 0)
+                    stats_text += f" | KNN Avg Distance: {avg_dist:.3f}"
             
-            ttk.Label(self.stats_frame, text=stats_text, font=self.fonts['caption'],
-                     foreground=self.colors['text_light']).pack()
+            # Create new label
+            self.stats_label = ttk.Label(self.stats_frame, text=stats_text, 
+                                       font=self.fonts['caption'],
+                                       foreground=self.colors['text_light'])
+            self.stats_label.pack()
             
         except Exception as e:
             print(f"Error updating stats: {e}")
+            # Don't show error to user, just log it
     
     def reset_form(self):
         """Reset all form inputs to defaults"""
-        self.weight_var.set(70.0)
-        self.height_var.set(170.0)
-        self.age_var.set(30)
-        self.gender_var.set("Male")
-        self.activity_var.set("Moderate")
-        self.weight_goal_var.set("Maintain Weight")
-        self.meal_type_var.set("Lunch")
-        self.category_var.set("All")
-        self.max_results_var.set("10")
-        
-        self.diabetes_var.set(False)
-        self.obesity_var.set(False)
-        self.hypertension_var.set(False)
-        self.cholesterol_var.set(False)
-        
-        # Clear results
-        for item in self.tree.get_children():
-            self.tree.delete(item)
-        
-        self.targets_text.delete(1.0, tk.END)
-        self.targets_text.insert(tk.END, "Click 'Calculate Nutrition' to see your personalized nutritional targets based on medical guidelines.")
-        
-        self.details_text.delete(1.0, tk.END)
-        self.details_text.insert(tk.END, "Select a food item to view detailed nutritional information and KNN similarity analysis.")
-        
-        self.update_charts([])
-        self.current_nutritional_data = None
-        self.last_recommendations = []
-        
-        self.status_var.set("Form reset to defaults")
+        try:
+            # Reset form variables
+            self.weight_var.set(70.0)
+            self.height_var.set(170.0)
+            self.age_var.set(30)
+            self.gender_var.set("Male")
+            self.activity_var.set("Moderate")
+            self.weight_goal_var.set("Maintain Weight")
+            self.meal_type_var.set("Lunch")
+            self.category_var.set("All")
+            self.max_results_var.set("10")
+            
+            self.diabetes_var.set(False)
+            self.obesity_var.set(False)
+            self.hypertension_var.set(False)
+            self.cholesterol_var.set(False)
+            
+            # Clear results safely
+            try:
+                if hasattr(self, 'tree') and self.tree.winfo_exists():
+                    for item in self.tree.get_children():
+                        self.tree.delete(item)
+            except tk.TclError:
+                pass
+            
+            # Clear text widgets safely
+            try:
+                if hasattr(self, 'targets_text') and self.targets_text.winfo_exists():
+                    self.targets_text.delete(1.0, tk.END)
+                    self.targets_text.insert(tk.END, "Click 'Calculate Nutrition' to see your personalized nutritional targets based on medical guidelines.")
+            except tk.TclError:
+                pass
+            
+            try:
+                if hasattr(self, 'details_text') and self.details_text.winfo_exists():
+                    self.details_text.delete(1.0, tk.END)
+                    self.details_text.insert(tk.END, "Select a food item to view detailed nutritional information and KNN similarity analysis.")
+            except tk.TclError:
+                pass
+            
+            # Update charts safely
+            try:
+                self.update_charts([])
+            except Exception:
+                pass
+            
+            # Reset data
+            self.current_nutritional_data = None
+            self.last_recommendations = []
+            
+            self.status_var.set("Form reset to defaults")
+            
+        except Exception as e:
+            print(f"Error during reset: {e}")
+            self.status_var.set("Reset completed with minor issues")
 
 
 def main():
@@ -1641,44 +1822,81 @@ def main():
     
     # Create main window
     root = tk.Tk()
+    root.title("Health-Driven KNN Food Recommendation System")
+    root.geometry("1400x900")
     
-    # Create splash screen
-    splash = tk.Toplevel(root)
-    splash.title("Loading KNN System...")
-    splash.geometry("500x300")
-    splash.resizable(False, False)
-    
-    # Center splash screen
-    splash.update_idletasks()
-    x = (splash.winfo_screenwidth() // 2) - (splash.winfo_width() // 2)
-    y = (splash.winfo_screenheight() // 2) - (splash.winfo_height() // 2)
-    splash.geometry(f"+{x}+{y}")
-    
-    # Splash content
-    splash_frame = ttk.Frame(splash, padding="50")
-    splash_frame.pack(fill=tk.BOTH, expand=True)
-    
-    ttk.Label(splash_frame, text="Health-Driven KNN Food Recommendation System", 
-             font=('Segoe UI', 16, 'bold')).pack(pady=20)
-    ttk.Label(splash_frame, text="Using K-Nearest Neighbors & Medical Guidelines", 
-             font=('Segoe UI', 12)).pack()
-    ttk.Label(splash_frame, text="Prince of Songkla University", 
-             font=('Segoe UI', 10)).pack(pady=10)
-    
-    # Progress bar
-    progress = ttk.Progressbar(splash_frame, mode='indeterminate')
-    progress.pack(fill=tk.X, pady=20)
-    progress.start()
-    
-    status_label = ttk.Label(splash_frame, text="Initializing KNN models...")
-    status_label.pack()
+    # Center main window
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+    x = (screen_width // 2) - (700)  # Half of 1400
+    y = (screen_height // 2) - (450)  # Half of 900
+    root.geometry(f"1400x900+{x}+{y}")
     
     # Hide main window initially
     root.withdraw()
     
-    def update_splash_status(message):
-        status_label.config(text=message)
+    # Create splash screen as a separate Toplevel
+    splash = None
+    progress = None
+    status_label = None
+    
+    def create_splash():
+        nonlocal splash, progress, status_label
+        
+        splash = tk.Toplevel(root)
+        splash.title("Loading KNN System...")
+        splash.geometry("500x300")
+        splash.resizable(False, False)
+        splash.grab_set()  # Make splash modal
+        
+        # Center splash screen
+        splash_x = (screen_width // 2) - 250
+        splash_y = (screen_height // 2) - 150
+        splash.geometry(f"500x300+{splash_x}+{splash_y}")
+        
+        # Splash content
+        splash_frame = ttk.Frame(splash, padding="50")
+        splash_frame.pack(fill=tk.BOTH, expand=True)
+        
+        ttk.Label(splash_frame, text="Health-Driven KNN Food Recommendation System", 
+                 font=('Segoe UI', 16, 'bold')).pack(pady=20)
+        ttk.Label(splash_frame, text="Using K-Nearest Neighbors & Medical Guidelines", 
+                 font=('Segoe UI', 12)).pack()
+        ttk.Label(splash_frame, text="Prince of Songkla University", 
+                 font=('Segoe UI', 10)).pack(pady=10)
+        
+        # Progress bar
+        progress = ttk.Progressbar(splash_frame, mode='indeterminate')
+        progress.pack(fill=tk.X, pady=20)
+        progress.start()
+        
+        status_label = ttk.Label(splash_frame, text="Initializing KNN models...")
+        status_label.pack()
+        
         splash.update()
+    
+    def update_splash_status(message):
+        if splash and splash.winfo_exists() and status_label:
+            try:
+                status_label.config(text=message)
+                splash.update()
+            except tk.TclError:
+                pass  # Ignore if splash is being destroyed
+    
+    def close_splash_safely():
+        nonlocal splash, progress, status_label
+        try:
+            if progress:
+                progress.stop()
+            if splash and splash.winfo_exists():
+                splash.grab_release()
+                splash.destroy()
+        except tk.TclError:
+            pass  # Splash already destroyed
+        finally:
+            splash = None
+            progress = None
+            status_label = None
     
     def initialize_system():
         try:
@@ -1687,43 +1905,48 @@ def main():
             recommender = HealthAwareKNNRecommender(update_splash_status)
             
             update_splash_status("Training KNN models...")
+            root.update()  # Process any pending events
             time.sleep(0.5)
             
             update_splash_status("Building user interface...")
+            root.update()
             
             # Create main UI
             app = HealthDrivenKNNFoodRecommenderUI(root, recommender)
+            
+            # Close splash safely
+            close_splash_safely()
             
             # Show main window
             root.deiconify()
             root.lift()
             root.focus_force()
             
-            # Close splash
-            splash.destroy()
-            
             print("KNN System initialized successfully!")
             
         except Exception as e:
-            splash.destroy()
+            close_splash_safely()
+            root.deiconify()  # Show main window even if there's an error
             messagebox.showerror("Initialization Error", f"Failed to initialize KNN system: {str(e)}")
-            root.quit()
+            print(f"Error: {e}")
+            # Don't quit, let user see the error
     
-    # Schedule initialization
-    root.after(100, initialize_system)
+    def start_initialization():
+        create_splash()
+        # Use after to avoid blocking
+        root.after(100, initialize_system)
     
-    # Configure main window
-    root.title("Health-Driven KNN Food Recommendation System")
-    root.geometry("1400x900")
-    
-    # Center main window
-    root.update_idletasks()
-    x = (root.winfo_screenwidth() // 2) - (root.winfo_width() // 2)
-    y = (root.winfo_screenheight() // 2) - (root.winfo_height() // 2)
-    root.geometry(f"+{x}+{y}")
+    # Start the initialization process
+    root.after(50, start_initialization)
     
     # Start application
-    root.mainloop()
+    try:
+        root.mainloop()
+    except Exception as e:
+        print(f"Application error: {e}")
+    finally:
+        # Cleanup
+        close_splash_safely()
 
 
 if __name__ == "__main__":
