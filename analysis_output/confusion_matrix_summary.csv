@@ -1,0 +1,16 @@
+Task,Model,Matrix_Shape,Total_Predictions,Correct_Predictions,CM_Accuracy,Min_Class_Accuracy,Max_Class_Accuracy,Avg_Class_Accuracy,Num_Classes
+Food_Category_Classification,KNN,11x11,76,45,0.5921052631578947,0.0,1.0,0.4535742035742036,11
+Food_Category_Classification,Random_Forest,11x11,76,52,0.6842105263157895,0.0,1.0,0.5692501942501942,11
+Food_Category_Classification,MLP,11x11,76,32,0.42105263157894735,0.0,1.0,0.2664141414141414,11
+Diabetes_Suitability,KNN,2x2,76,74,0.9736842105263158,0.8,1.0,0.9,2
+Diabetes_Suitability,Random_Forest,2x2,76,75,0.9868421052631579,0.9,1.0,0.95,2
+Diabetes_Suitability,MLP,2x2,76,69,0.9078947368421053,0.4,0.9848484848484849,0.6924242424242424,2
+Obesity_Suitability,KNN,2x2,76,69,0.9078947368421053,0.8333333333333334,0.921875,0.8776041666666667,2
+Obesity_Suitability,Random_Forest,2x2,76,70,0.9210526315789473,0.8333333333333334,0.9375,0.8854166666666667,2
+Obesity_Suitability,MLP,2x2,76,70,0.9210526315789473,0.8333333333333334,0.9375,0.8854166666666667,2
+Hypertension_Suitability,KNN,1x1,76,76,1.0,1.0,1.0,1.0,1
+Hypertension_Suitability,Random_Forest,1x1,76,76,1.0,1.0,1.0,1.0,1
+Hypertension_Suitability,MLP,1x1,76,76,1.0,1.0,1.0,1.0,1
+High_Cholesterol_Suitability,KNN,1x1,76,76,1.0,1.0,1.0,1.0,1
+High_Cholesterol_Suitability,Random_Forest,1x1,76,76,1.0,1.0,1.0,1.0,1
+High_Cholesterol_Suitability,MLP,1x1,76,76,1.0,1.0,1.0,1.0,1

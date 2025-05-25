@@ -4,3 +4,8 @@ Performance Metrics จาก ML ทั้งสามตัว (KNN RF XGB)
 2. Random Forest
 3. XGBoost
 4. Multi-layer Perceptron (MLP) หรือ Deep Neural Networks (Optional)
+
+
+
+สิ่งที่ต้องศึกษาเพิ่มเติม
+ - (ทำความเข้าใจ accuracy,precision,recall,f1-score)[https://www.ninenox.com/2020/09/24/%E0%B8%97%E0%B8%B3%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B9%83%E0%B8%88-accuracyprecisionrecallf1-score/]
