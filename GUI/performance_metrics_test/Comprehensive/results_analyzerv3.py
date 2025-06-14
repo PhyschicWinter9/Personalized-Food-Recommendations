@@ -489,14 +489,14 @@ class ModelResultsAnalyzer:
         
         # Prepare data for grouped bar chart
         models = summary_df['Model'].tolist()
-        metrics = ['Accuracy', 'F1_Score', 'Precision', 'Recall', 'Success_Rate']
-        metric_labels = ['Accuracy', 'F1-Score', 'Precision', 'Recall', 'Success Rate']
+        metrics = ['Accuracy', 'F1_Score', 'Precision', 'Recall']
+        metric_labels = ['Accuracy', 'F1-Score', 'Precision', 'Recall']
         
         x = np.arange(len(models))  # Label locations
-        width = 0.15  # Width of bars
+        width = 0.18  # Width of bars (slightly wider since we have fewer bars)
         
         # Define colors for each metric
-        colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
+        colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
         
         # Create bars for each metric
         for i, (metric, label, color) in enumerate(zip(metrics, metric_labels, colors)):
@@ -513,7 +513,7 @@ class ModelResultsAnalyzer:
         ax.set_xlabel('Models', fontweight='bold')
         ax.set_ylabel('Performance Score', fontweight='bold')
         ax.set_title('Comprehensive Model Performance Comparison', fontsize=14, fontweight='bold')
-        ax.set_xticks(x + width * 2)  # Center the x-ticks
+        ax.set_xticks(x + width * 1.5)  # Center the x-ticks (adjusted for 4 bars)
         ax.set_xticklabels(models)
         ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
         ax.set_ylim(0, 1.1)  # Set y-axis limits
@@ -579,7 +579,7 @@ class ModelResultsAnalyzer:
         
         print(f"\n📊 Visualizations saved to {output_dir}/")
         print("   - model_performance_comparison.png (detailed 4-subplot view)")
-        print("   - model_performance_comparison_combined.png (combined single-plot view)")
+        print("   - model_performance_comparison_combined.png (combined single-plot view: Accuracy, F1, Precision, Recall)")
         print("   - task_performance_heatmap.png")
         print("   - model_consistency_analysis.png")
         
